@@ -1,0 +1,11 @@
+.DS_Store
+/.direnv
+
+# ignore secrets
+secrets.nix
+.env*
+!.env.example
+
+# ignore all vim generated files except vimrc
+/extras/vim/*
+!/extras/vim/vimrc

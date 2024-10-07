@@ -1,0 +1,5 @@
+- Unlike on VMWare or UTM, NixOS on Orbstack is mostly handled by Orbstack.
+- Orbstack only supports NixOS 23.11, which is incompatible with the config.
+- Users are not managed by config on Orbstack.
+- On VMWare or UTM during OS installation, `/etc/nixos` is overriden with a link to `~/config` and `nixos-generate-config` is never ran directly on `/etc/nixos`. Orbstack generates a bunch of files we can't replace, therefore we don't replace `/etc/nixos` with a link here.
+- Nix will directly run this config without flake as `nixos-rebuild switch -I nixos-config=[config-path]`, where `[config-path] is the path to `configuration.nix` in parent macOS. This works because of shared directory feature of Orbstack.

@@ -1,0 +1,6 @@
+0. This directory must be placed at `~/config` for the scripts make such an assumption.
+1. Multiple hosts are possible.
+2. Each hosts can have multiple different users. Users are created at OS level. Home manager works on $HOME folders already created.
+3. Each users can have multiple different features which can be turned on/off at flake level.
+4. Software configurations (e.g. vim, ghostty) live in `/extras`.
+5. Domain/website/DNS provisioning configurations live in `/terraform`.

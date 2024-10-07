@@ -1,0 +1,152 @@
+{
+  // Must haves.
+  "editor.formatOnSave": true,
+  "editor.autoClosingBrackets": "languageDefined",
+  "editor.lineNumbers": "relative",
+  "editor.tabSize": 2,
+  // UI aesthetics.
+  "workbench.startupEditor": "none",
+  "workbench.tips.enabled": false,
+  "workbench.settings.editor": "json",
+  "workbench.layoutControl.enabled": true,
+  "window.commandCenter": false,
+  "window.titleBarStyle": "custom",
+  "breadcrumbs.enabled": false,
+  "editor.scrollBeyondLastLine": true,
+  "workbench.layoutControl.type": "menu",
+  "editor.rulers": [
+    100
+  ],
+  // Editor aesthetics.
+  "editor.renderWhitespace": "selection",
+  "editor.guides.indentation": false,
+  "editor.fontLigatures": true,
+  "workbench.fontAliasing": "default",
+  // Smooth animations.
+  "editor.smoothScrolling": true,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorBlinking": "phase",
+  // Don't ask me to confirm these again.
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "git.openRepositoryInParentFolders": "never",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  // Remove distractions.
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.stickyScroll.enabled": false,
+  "editor.codeLens": false,
+  "editor.lightbulb.enabled": "off",
+  "editor.hover.delay": 1000,
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "editor.minimap.autohide": true,
+  "editor.inlineSuggest.enabled": false,
+  "editor.parameterHints.enabled": false,
+  "editor.quickSuggestionsDelay": 100000,
+  "editor.quickSuggestions": {
+    "other": "off",
+    "comments": "off",
+    "strings": "off",
+  },
+  // File nesting.
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.test.ts"
+  },
+  // Make it vim like.
+  "vim.foldfix": true,
+  "vim.useSystemClipboard": true,
+  "vim.showMarksInGutter": true,
+  "vim.leader": " ",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "<leader>",
+        "e"
+      ],
+      "commands": [
+        "workbench.action.toggleSidebarVisibility"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "a"
+      ],
+      "commands": [
+        "editor.action.quickFix"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "r"
+      ],
+      "commands": [
+        "editor.action.rename"
+      ]
+    },
+    {
+      "before": [
+        "g",
+        "r"
+      ],
+      "commands": [
+        "editor.action.goToReferences"
+      ]
+    }
+  ],
+  // One of my favorite features of vscode, very easy to configure file associations.
+  "files.associations": {
+    "flake.lock": "json",
+    "*.json": "json",
+    "*.jsonc": "jsonc",
+    "*.svg": "xml",
+    "*.mdx": "mdx"
+  },
+  // Hidden files/folders.
+  "files.exclude": {
+    "**/.direnv": true
+  },
+  // Read only files.
+  "files.readonlyInclude": {
+    ".direnv/**/*": true,
+    "bun.lockb": true,
+    "flake.lock": true,
+    "node_modules/**/*": false
+  },
+  // Terminal.
+  "terminal.integrated.defaultProfile.osx": "fish",
+  // Font.
+  "editor.fontFamily": "'Inconsolata'",
+  "editor.fontSize": 19,
+  "editor.fontWeight": "500",
+  "editor.letterSpacing": -0.7,
+  "editor.lineHeight": 1.4,
+  // Load custom css.
+  "vscode_custom_css.imports": [
+    "file:///Users/Shared/.vscode/custom.css"
+  ],
+  "vscode_custom_css.statusbar": false,
+  // Wrap lines when I edit MDX files.
+  "[mdx]": {
+    "editor.wordWrap": "on",
+  },
+  "[go]": {
+    "editor.tabSize": 4
+  },
+  // File formatters.
+  "editor.defaultFormatter": "biomejs.biome",
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+  "[nix]": {
+    "editor.defaultFormatter": "jnoortheen.nix-ide"
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  },
+}

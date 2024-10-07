@@ -1,0 +1,5 @@
+" Every now and then, I use vim without any plugins to get away from all the
+" formatters, linters, completions and fuzzy-finders.
+"
+" It's like meditation. It's not all fun but much needed and brings me peace.
+set number relativenumber
