@@ -6,7 +6,7 @@
   # Manage /etc/fish.
   programs.bash.enable = false;
   programs.zsh.enable = false;
-  programs.fish.enable = true;
+  programs.fish.enable = false;
 
   system.defaults.NSGlobalDomain = {
     # Fastest key repeat rate + lowest delay until repeat.

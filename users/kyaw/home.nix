@@ -39,6 +39,7 @@ in
   # I don't use system default ssh-agent at all.
   programs._1password = {
     enable = true;
+    cli.enable = true;
     enableSshAgent = true;
     enableGitSigning = true;
     sshKeys = [
@@ -62,6 +63,9 @@ in
     interactiveShellInit = ''
       # Turn off fish's greetings.
       set -g fish_greeting
+
+      # Without this Ctrl-Z and fg don't work.
+      set -Ux tide_jobs_number_threshold 1
 
       # If tide is not configured; configure it.
       if not set -q tide_character_icon
@@ -91,7 +95,7 @@ in
   };
 
   # My favourite terminal emulator.
-  programs.ghostty = {
+  programs._ghostty = {
     enable = true;
     package = if isLinux then pkgs.ghostty else null;
     settings = {
@@ -251,14 +255,17 @@ in
     terraform-ls
 
     # I use nerd fonts separately, instead of patched versions. Thanks ghostty!
-    (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+    nerd-fonts.symbols-only
 
+    # I use this for reviewing PRs. Less commands to type.
+    gh
   ]
   ++ (lib.optional isDarwin darwin.trash)
   ++ (lib.optional isLinux trash-cli);
 
   imports = [ ]
     ++ (lib.optional features.web ./web.nix)
+    ++ (lib.optional features.systems ./systems.nix)
     ++ (lib.optional (builtins.pathExists ./secrets.nix) ./secrets.nix);
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

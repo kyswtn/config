@@ -10,6 +10,6 @@
 
     # JS runtimes.
     bun
-    nodejs_20
+    nodejs_22
   ];
 }

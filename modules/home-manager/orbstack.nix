@@ -17,7 +17,7 @@ in
 
   config = mkIf cfg.enable {
     home.packages = optional (cfg.package != null) cfg.package;
-    home.sessionPath = [ "${orbstackPath}/bin" ];
+    # home.sessionPath = [ "${orbstackPath}/bin" ];
     programs.ssh.includes = [
       "${orbstackPath}/ssh/config"
     ];

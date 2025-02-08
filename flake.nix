@@ -13,16 +13,15 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ghostty = {
-      url = "git+ssh://git@github.com/ghostty-org/ghostty";
-    };
+    zigtools-zls.url = "github:zigtools/zls";
+    ghostty.url = "git+ssh://git@github.com/ghostty-org/ghostty";
   };
 
   outputs = inputs@{ nixpkgs, ... }:
     let
       mkSystems = import ./lib/mksystems.nix inputs;
       systems = mkSystems {
-        features = [ "web" ];
+        features = [ "web" "systems" ];
         hosts = {
           macbook-pro = {
             localHostName = "Kyaws-MacBook-Pro";

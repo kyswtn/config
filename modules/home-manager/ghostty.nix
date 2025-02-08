@@ -1,7 +1,7 @@
 # copied from https://github.com/clo4/ghostty-hm-module/blob/887e13a6e7acf5ffaab0119d96e476d84db90904/module.nix
 { config, lib, pkgs, ... }:
 with lib; let
-  cfg = config.programs.ghostty;
+  cfg = config.programs._ghostty;
 
   eitherStrBoolNum = with types; either str (either bool number);
 
@@ -45,7 +45,7 @@ with lib; let
   };
 in
 {
-  options.programs.ghostty = {
+  options.programs._ghostty = {
     enable = mkEnableOption "Ghostty terminal emulator";
 
     settings = mkOption {

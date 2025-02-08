@@ -64,6 +64,7 @@ return {
         -- tailwindcss = {},
         html = {},
         cssls = {},
+        pylsp = {},
         jsonls = {},
         ts_ls = {
           settings = {},
