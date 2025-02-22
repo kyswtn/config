@@ -72,7 +72,7 @@ in
         tide configure \
           --auto \
           --style=Lean \
-          --prompt_colors='True color' \
+          --prompt_colors='16 colors' \
           --show_time=No \
           --lean_prompt_height='Two lines' \
           --prompt_connection=Disconnected \
@@ -80,6 +80,7 @@ in
           --icons='Few icons' \
           --transient=No
       end
+      set --universal tide_character_icon ">"
 
       # Hide direnv logs.
       set -x DIRENV_LOG_FORMAT ""
@@ -138,7 +139,7 @@ in
   # between editors.
   programs.helix = {
     enable = true;
-    package = pkgs.helix;
+    package = pkgs.evil-helix;
     settings = {
       theme = "base16_transparent";
       editor = {
@@ -249,10 +250,6 @@ in
     monaspace
     jetbrains-mono
     agave
-
-    # My webistes' DNS, provisioning, and deployment is managed via Terraform.
-    terraform
-    terraform-ls
 
     # I use nerd fonts separately, instead of patched versions. Thanks ghostty!
     nerd-fonts.symbols-only

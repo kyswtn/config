@@ -46,6 +46,7 @@ return {
           -- config
           "terraform",
           "toml",
+          "hcl",
         },
         sync_install = false,
         highlight = { enable = true },
