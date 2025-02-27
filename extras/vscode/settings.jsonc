@@ -1,36 +1,77 @@
 {
-  // Must haves.
-  "editor.formatOnSave": true,
-  "editor.autoClosingBrackets": "languageDefined",
-  "editor.lineNumbers": "relative",
-  "editor.tabSize": 2,
+  // All telemetry off.
   "telemetry.telemetryLevel": "off",
   "gitlens.telemetry.enabled": false,
+  "redhat.telemetry.enabled": false,
+  // Don't ask me to confirm these again.
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "never",
+  "gitlens.gitCommands.skipConfirmations": [
+    "fetch:command",
+    "stash-push:command"
+  ],
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "vsicons.dontShowNewVersionMessage": true,
+  // Configure files.
+  "files.associations": {
+    "*.lock": "json",
+    "*.svg": "xml",
+    "*.css": "tailwindcss",
+    "*.hcl": "terraform"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.direnv": true,
+    "**/node_modules": true,
+    "**/.terraform": true
+  },
+  "files.readonlyInclude": {
+    "**/.direnv/**/*": true,
+    "**/node_modules/**/*": false
+  },
+  "workbench.editorAssociations": {
+    "*.svg": "default"
+  },
+  // You've got to have these.
+  "editor.autoClosingQuotes": "languageDefined",
+  "editor.autoClosingBrackets": "languageDefined",
+  "html.autoClosingTags": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.lineNumbers": "relative",
+  "editor.tabSize": 2,
   // UI aesthetics.
+  "breadcrumbs.enabled": false,
+  "window.commandCenter": false,
+  "window.titleBarStyle": "custom",
+  "workbench.layoutControl.enabled": true,
+  "workbench.layoutControl.type": "menu",
+  "workbench.settings.editor": "json",
   "workbench.startupEditor": "none",
   "workbench.tips.enabled": false,
-  "workbench.settings.editor": "json",
-  "workbench.layoutControl.enabled": true,
-  "window.titleBarStyle": "custom",
-  "breadcrumbs.enabled": false,
-  "editor.scrollBeyondLastLine": true,
-  "workbench.layoutControl.type": "menu",
-  "editor.rulers": [100],
+  "zenMode.showTabs": "none",
+  "zenMode.hideStatusBar": true,
+  "zenMode.hideActivityBar": false,
+  "zenMode.centerLayout": false,
+  "zenMode.fullScreen": false,
   // Editor aesthetics.
-  "editor.renderWhitespace": "selection",
-  "editor.guides.indentation": false,
   "editor.fontLigatures": true,
-  "workbench.fontAliasing": "none",
+  "editor.guides.indentation": false,
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "selection",
+  // https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md
+  "editor.rulers": [100],
+  "editor.scrollBeyondLastLine": true,
+  "editor.scrollBeyondLastColumn": 0,
   // Smooth animations.
   "editor.smoothScrolling": true,
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorBlinking": "phase",
-  // Don't ask me to confirm these again.
-  "explorer.confirmDragAndDrop": false,
-  "explorer.confirmDelete": false,
-  "git.openRepositoryInParentFolders": "never",
-  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.list.smoothScrolling": true,
   // Remove distractions.
+  "window.title": " ",
   "editor.scrollbar.horizontal": "hidden",
   "editor.stickyScroll.enabled": false,
   "editor.codeLens": false,
@@ -46,12 +87,16 @@
     "comments": "off",
     "strings": "off"
   },
+  "editor.scrollbar.vertical": "hidden",
+  "editor.scrollbar.verticalScrollbarSize": 0,
   // File nesting.
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
     "*.ts": "${capture}.test.ts"
   },
+  // Terminal.
+  "terminal.integrated.defaultProfile.osx": "fish",
   // Make it vim like.
   "vim.foldfix": true,
   "vim.useSystemClipboard": true,
@@ -75,92 +120,52 @@
       "commands": ["editor.action.goToReferences"]
     }
   ],
-  // One of my favorite features of vscode, very easy to configure file associations.
-  "files.associations": {
-    "flake.lock": "json",
-    "*.json": "json",
-    "*.jsonc": "jsonc",
-    "*.svg": "xml",
-    "*.mdx": "mdx",
-    "*.css": "tailwindcss"
-  },
-  // Hidden files/folders.
-  "files.exclude": {
-    "**/.direnv": true,
-    "**/node_modules": true,
-    "**/.terraform": false
-  },
-  // Read only files.
-  "files.readonlyInclude": {
-    ".direnv/**/*": true,
-    "bun.lockb": true,
-    "flake.lock": true,
-    "node_modules/**/*": false
-  },
-  // Terminal.
-  "terminal.integrated.defaultProfile.osx": "fish",
-  // Font.
-  "editor.fontFamily": "'monolisa'",
-  "window.title": " ",
+  // Editor font.
+  "editor.fontFamily": "Monolisa, Menlo",
   "editor.fontSize": 15,
   "editor.fontWeight": "400",
-  "editor.fontVariations": "'wght' 500",
-  "editor.scrollbar.vertical": "hidden",
-  "editor.scrollbar.verticalScrollbarSize": 0,
-  "editor.letterSpacing": -0.5,
+  "editor.letterSpacing": -0.75,
   "editor.lineHeight": 1.5,
+  "workbench.fontAliasing": "default",
+  // Editor looks, tweaked all the times.
+  "workbench.colorTheme": "poimandres-noitalics",
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.productIconTheme": "icons-carbon",
   // Load custom css.
   "vscode_custom_css.imports": ["file:///Users/Shared/.vscode/custom.css"],
   "vscode_custom_css.statusbar": false,
-  // Wrap lines when I edit MDX files.
-  "[mdx]": {
-    "editor.wordWrap": "on"
-  },
-  "[go]": {
-    "editor.tabSize": 4
-  },
-  // File formatters.
-  "biome.enabled": true,
-  "editor.defaultFormatter": "biomejs.biome",
-  "[xml]": {
-    "editor.defaultFormatter": "redhat.vscode-xml"
-  },
-  "[nix]": {
-    "editor.defaultFormatter": "jnoortheen.nix-ide"
-  },
-  "[rust]": {
-    "editor.defaultFormatter": "rust-lang.rust-analyzer"
-  },
-  "gitlens.gitCommands.skipConfirmations": ["fetch:command", "stash-push:command"],
-  "redhat.telemetry.enabled": false,
-  "editor.minimap.enabled": false,
-  "window.commandCenter": false,
-  "vercel.deployments.autorefreshPeriod": 20,
+  // File formatters and language specific settings.
   "editor.codeActionsOnSave": {
     "source.organizeImports": "never",
     "source.organizeImports.biome": "explicit"
   },
+  "[svg][xml][xsl]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode"
   },
-  "[tailwindcss]": {
+  "[markdown][jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "unocss.languageIds": ["astro"],
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "git.confirmSync": false,
-  "workbench.iconTheme": "vscode-icons",
-  "workbench.productIconTheme": "icons-carbon",
-  "vsicons.dontShowNewVersionMessage": true,
-  "[terraform]": {
+  "[terraform][hcl]": {
     "editor.defaultFormatter": "hashicorp.terraform"
   },
-  "workbench.colorTheme": "Vitesse Dark",
-  "nix.formatterPath": "nixpkgs-fmt",
-  "terraform.languageServer.enable": true
+  "[shellscript][dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[dockerfile][dockercompose]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "[javascript][typescript][javascriptreact][typescriptreact][json][css][tailwindcss][graphql]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[mdx]": {
+    "editor.wordWrap": "on",
+    "editor.defaultFormatter": "unifiedjs.vscode-mdx"
+  },
+  "[go]": {
+    "editor.tabSize": 4
+  },
+  "nix.formatterPath": "nixpkgs-fmt"
 }

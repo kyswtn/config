@@ -11,6 +11,7 @@ in
   programs.ssh = {
     enable = true;
     package = null;
+    includes = [ "~/.ssh/extra_config" ];
   };
 
   programs.gpg = {
@@ -49,6 +50,7 @@ in
 
   # I don't chsh. I just use my terminal emulator to specify fish as main program.
   # That way I won't be locked out in case fish breaks.
+  programs.fzf.enable = true;
   programs.fish = {
     enable = true;
     package = pkgs.fish;
@@ -139,7 +141,7 @@ in
   # between editors.
   programs.helix = {
     enable = true;
-    package = pkgs.evil-helix;
+    package = pkgs.helix;
     settings = {
       theme = "base16_transparent";
       editor = {
@@ -147,6 +149,28 @@ in
         cursor-shape.insert = "bar";
         auto-format = true;
       };
+    };
+    languages = {
+      language = [
+        {
+          name = "yaml";
+          auto-format = true;
+          formatter = { command = "prettierd"; args = [ "_.yaml" ]; };
+        }
+        {
+          name = "nix";
+          auto-format = true;
+          formatter = { command = "nixpkgs-fmt"; args = [ ]; };
+        }
+        {
+          name = "lua";
+          auto-format = true;
+        }
+        {
+          name = "typescript";
+          auto-format = true;
+        }
+      ];
     };
   };
 
@@ -176,15 +200,6 @@ in
   programs.orbstack = {
     enable = isDarwin;
     package = null;
-  };
-
-  # Some of my machines use Gnome on NixOS because it's the simplest to setup.
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      font-name = "Monaspace Krypton 10";
-      monospace-font-name = "Monaspace Krypton 10";
-      enable-animations = false;
-    };
   };
 
   home.packages = with pkgs; [
@@ -228,7 +243,17 @@ in
     xh
     hurl
 
-    # Nix & friends.
+    # I use this for reviewing PRs. Less commands to type.
+    gh
+
+    # I use nerd fonts separately, instead of patched versions. Thanks ghostty!
+    nerd-fonts.symbols-only
+
+    # Required by neovim & helix for DAP.
+    tree-sitter
+    lldb
+
+    # Nix LSP & formatter.
     nil
     nixpkgs-fmt
 
@@ -236,26 +261,18 @@ in
     bash-language-server
     shfmt
 
-    # These are only here for neovim configs.
+    # Lua LSP & formatter.
     lua-language-server
     stylua
-    tree-sitter
 
-    # Required by neovim & helix for DAP.
-    lldb
+    # Other language servers & formatters.
+    yaml-language-server
+    prettierd
+    biome
+    dockerfile-language-server-nodejs
 
-    # Favorite monospace fonts.
-    roboto-mono
-    inconsolata
-    monaspace
-    jetbrains-mono
-    agave
-
-    # I use nerd fonts separately, instead of patched versions. Thanks ghostty!
-    nerd-fonts.symbols-only
-
-    # I use this for reviewing PRs. Less commands to type.
-    gh
+    # I don't use this anymore, but needs it for formatting.
+    terraform
   ]
   ++ (lib.optional isDarwin darwin.trash)
   ++ (lib.optional isLinux trash-cli);
