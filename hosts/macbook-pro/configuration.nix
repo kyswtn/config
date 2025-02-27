@@ -60,11 +60,13 @@
       "ghostty"
       "zen-browser"
       "obsidian"
-      "1password"
-      "spotify"
+      "visual-studio-code"
       "utm"
       "orbstack"
-      "visual-studio-code"
+      "1password"
+      "spotify"
+      "tailscale"
+      "discord"
     ];
   };
 
