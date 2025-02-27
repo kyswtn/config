@@ -3,23 +3,20 @@ return {
     "stevearc/conform.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
+      stop_after_first = true,
       formatters_by_ft = {
-        -- Essentials.
         lua = { "stylua" },
         nix = { "nixpkgs_fmt" },
         sh = { "shfmt" },
-
-        -- Web stuff.
-        html = { { "biome", "prettierd" } },
-        css = { { "biome", "prettierd" } },
-        json = { { "biome", "prettierd" } },
-        typescript = { { "biome", "prettierd" } },
-        typescriptreact = { { "biome", "prettierd" } },
-        javascript = { { "biome", "prettierd" } },
-        javascriptreact = { { "biome", "prettierd" } },
-        markdown = { { "biome", "prettierd" } },
-
-        -- Biome doesn't support astro yet.
+        html = { "biome", "prettierd" },
+        css = { "biome", "prettierd" },
+        json = { "biome", "prettierd" },
+        typescript = { "biome", "prettierd" },
+        typescriptreact = { "biome", "prettierd" },
+        javascript = { "biome", "prettierd" },
+        javascriptreact = { "biome", "prettierd" },
+        -- Biome doesn't support these properly yet.
+        markdown = { "prettierd" },
         astro = { "prettierd" },
       },
       format_on_save = function(bufnr)

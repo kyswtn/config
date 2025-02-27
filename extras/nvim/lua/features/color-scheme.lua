@@ -27,8 +27,8 @@ return {
       })
     end,
     init = function()
-      -- vim.cmd("set background=dark")
-      -- vim.cmd.colorscheme("rose-pine")
+      vim.cmd("set background=dark")
+      vim.cmd.colorscheme("rose-pine")
     end,
   },
   {
@@ -62,8 +62,8 @@ return {
       vim.g.gruvbox_material_better_performance = 1
       vim.g.gruvbox_material_enable_italic = false
       vim.g.gruvbox_material_transparent_background = true
-      vim.cmd("set background=dark")
-      vim.cmd.colorscheme("gruvbox-material")
+      -- vim.cmd("set background=dark")
+      -- vim.cmd.colorscheme("gruvbox-material")
     end,
   },
   {

@@ -1,6 +1,7 @@
 return {
   {
     "folke/which-key.nvim",
+    enabled = false,
     event = "VeryLazy",
     init = function()
       vim.o.timeout = true
@@ -11,7 +12,7 @@ return {
       icons = {
         separator = "",
       },
-      window = {
+      win = {
         border = "single",
         margin = { 1, 0, 1, 0.6 },
         padding = { 0, 0, 0, 0 },

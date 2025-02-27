@@ -26,13 +26,17 @@ return {
   },
   {
     "folke/noice.nvim",
-    enabled = true,
+    enabled = false,
     event = "VeryLazy",
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
     init = function()
+      require("notify").setup({
+        background_colour = "#000000",
+      })
+
       require("noice").setup({
         presets = {
           lsp_doc_border = true,

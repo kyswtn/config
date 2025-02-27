@@ -34,7 +34,6 @@ map("n", "<leader>F", utils.call_telescope("git_files", {}), { desc = "Open file
 map("n", "<leader>b", utils.call_telescope("buffers"), { desc = "Open buffer picker" })
 map("n", "<leader>h", utils.call_telescope("help_tags"), { desc = "Open help tags" })
 map("n", "<leader>/", utils.call_telescope("live_grep"), { desc = "Find in files" })
-map("n", "<leader>?", utils.call_telescope("commands"), { desc = "Open command palette" })
 map("n", "gW", utils.call_telescope("grep_string"), { desc = "Search word under cursor (cwd)" })
 
 -- LSP actions.
