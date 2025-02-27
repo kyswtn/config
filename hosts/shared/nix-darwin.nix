@@ -2,8 +2,8 @@
 {
   # Setup nix.
   nix = {
+    optimise.automatic = true;
     settings = {
-      auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
       keep-outputs = false;
       trusted-users = [ "root" "kyaw" ];
@@ -26,9 +26,6 @@
 
   # Setup timezone.
   time.timeZone = "Asia/Bangkok";
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
 
   # Set Git commit hash for darwin-version.
   system.configurationRevision = with flakeInputs; self.rev or self.dirtyRev or null;

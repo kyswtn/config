@@ -54,7 +54,7 @@ in
         '';
       };
 
-      package = mkPackageOption pkgs "_1password" { };
+      package = mkPackageOption pkgs "_1password-cli" { };
     };
 
     enableSshAgent = mkOption {

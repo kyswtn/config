@@ -3,10 +3,10 @@
   # By the way ’ here is not ' otherwise nix-darwin errors.
   networking.computerName = "Kyaw’s MacBook Pro";
 
-  # Manage /etc/fish.
-  programs.bash.enable = false;
-  programs.zsh.enable = false;
-  programs.fish.enable = false;
+  # Add proper NIX_PATH variables.
+  programs.bash.enable = true;
+  programs.zsh.enable = true;
+  programs.fish.enable = true;
 
   system.defaults.NSGlobalDomain = {
     # Fastest key repeat rate + lowest delay until repeat.
@@ -55,17 +55,19 @@
     brews = [ ];
     casks = [
       "appcleaner"
-      "shottr"
-      "keyboardcleantool"
       "raycast"
-      "utm"
-      "protonmail-bridge"
-      "orbstack"
-      "remnote"
+      "alt-tab"
+      "ghostty"
+      "zen-browser"
       "obsidian"
+      "1password"
+      "spotify"
+      "utm"
+      "orbstack"
+      "visual-studio-code"
     ];
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = 4;
+  system.stateVersion = 5;
 }
