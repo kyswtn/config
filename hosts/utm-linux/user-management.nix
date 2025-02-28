@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   credentials = import ../../credentials.nix;
 in
@@ -7,5 +7,6 @@ in
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
     openssh.authorizedKeys.keys = credentials.sshKeys;
+    shell = pkgs.fish;
   };
 }

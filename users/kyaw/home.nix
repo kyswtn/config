@@ -8,6 +8,10 @@ let
   thisFlakeAbsolutePath = "${config.home.homeDirectory}/config";
 in
 {
+  # Link ~/.config/home-manager to this flake so we don't have to specify it always.
+  xdg.configFile."home-manager".source =
+    mkOutOfStoreSymlink "${thisFlakeAbsolutePath}";
+
   programs.ssh = {
     enable = true;
     package = null;
@@ -48,7 +52,7 @@ in
     ];
   };
 
-  # I don't chsh. I just use my terminal emulator to specify fish as main program.
+  # On macOS I don't chsh. I just use my terminal emulator to specify fish as main program.
   # That way I won't be locked out in case fish breaks.
   programs.fzf.enable = true;
   programs.fish = {
@@ -98,7 +102,7 @@ in
   };
 
   # My favourite terminal emulator.
-  programs._ghostty = {
+  programs.ghostty = {
     enable = true;
     package = if isLinux then pkgs.ghostty else null;
     settings = {

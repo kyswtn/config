@@ -1,7 +1,5 @@
 { ... }: {
   imports = [
-    ./ghostty.nix
-    ./ghostty-linux-overlay.nix
     ./1password.nix
     ./home-manager-patches.nix
     ./nix-patches.nix

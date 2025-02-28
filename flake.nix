@@ -13,8 +13,14 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zigtools-zls.url = "github:zigtools/zls";
-    ghostty.url = "git+ssh://git@github.com/ghostty-org/ghostty";
+    zig-overlay = {
+      url = "github:mitchellh/zig-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    zigtools-zls = {
+      url = "github:zigtools/zls";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ nixpkgs, ... }:
@@ -30,7 +36,7 @@
             managed-by = "nix-darwin";
             users = [ "kyaw" ];
           };
-          vmware-linux = {
+          utm-linux = {
             system = "aarch64-linux";
             managed-by = "nixos";
             users = [ "kyaw" ];

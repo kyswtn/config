@@ -21,6 +21,7 @@ return {
         lineFoldingOnly = true,
       }
 
+      vim.diagnostic.config({ virtual_text = false })
       local on_attach = function(_, bufnr)
         opts.buffer = bufnr
 
@@ -61,7 +62,6 @@ return {
         clangd = {},
         nil_ls = {},
         marksman = {},
-        -- tailwindcss = {},
         html = {},
         cssls = {},
         pylsp = {},
@@ -102,10 +102,5 @@ return {
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
       end
     end,
-  },
-  {
-    "luckasRanarison/tailwind-tools.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {},
   },
 }

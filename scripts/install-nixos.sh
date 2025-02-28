@@ -4,45 +4,45 @@
 set -e
 
 printf "HOSTNAME: "
-read HOSTNAME
+read -r HOSTNAME
 
 printf "USERNAME: "
-read USERNAME
+read -r USERNAME
 
 stty -echo
 printf "PASSWORD: "
-read PASSWORD
+read -r PASSWORD
 stty echo
 printf "\n"
 
 # Install NixOS.
 FLAKE_DIR=$(realpath "$(dirname "$(dirname "$0")")")
-nixos-install --no-root-passwd --impure --flake $FLAKE_DIR#$HOSTNAME
+# Mark directory as safe to use for nix.
+git config --global --add safe.directory "$FLAKE_DIR"
+nixos-install --no-root-passwd --impure --flake "$FLAKE_DIR#$HOSTNAME"
 
 # Important directories.
 CFG_DIR_NAME="config"
 
 # Remove existing directories to make the script idempotent.
-rm -rf /mnt/etc/nixos
-rm -rf /mnt/home/$USERNAME/$CFG_DIR_NAME
-rm -rf /mnt/home/$USERNAME/.config/home-manager
+rm -rf "/mnt/etc/nixos"
+rm -rf "/mnt/home/$USERNAME/$CFG_DIR_NAME"
 
 # Make required directories.
-mkdir -p /mnt/etc
-mkdir -p /mnt/home/$USERNAME/.config
-mkdir -p /mnt/home/$USERNAME/.local/state/nix/profiles
+mkdir -p "/mnt/etc"
+mkdir -p "/mnt/home/$USERNAME/.config"
+mkdir -p "/mnt/home/$USERNAME/.local/state/nix/profiles"
 
 # Make a copy for the user to be able to rebuild immediately after logging in.
-cp -r $FLAKE_DIR /mnt/home/$USERNAME/$CFG_DIR_NAME
+cp -r "$FLAKE_DIR" "/mnt/home/$USERNAME/$CFG_DIR_NAME"
 
 # Make files made/copied here editable by user.
-# Then link .config/home-manager & /etc/nixos from ~/config.
+# Then /etc/nixos from ~/config.
 nixos-enter -c "\
-  chown -R $USERNAME:users /home/$USERNAME/$CFG_DIR_NAME/ && \
   chown -R $USERNAME:users /home/$USERNAME/.config && \
   chown -R $USERNAME:users /home/$USERNAME/.local && \
-  ln -s /home/$USERNAME/$CFG_DIR_NAME/ /etc/nixos && \
-  ln -s /home/$USERNAME/$CFG_DIR_NAME/ /home/$USERNAME/.config/home-manager \
+  chown -R $USERNAME:users /home/$USERNAME/$CFG_DIR_NAME/ && \
+  ln -s /home/$USERNAME/$CFG_DIR_NAME/ /etc/nixos
   "
 
 # Set user password.

@@ -1,3 +1,5 @@
+## Setup - macOS
+
 ```sh
 cd ~
 scutil --set LocalHostName "Kyaws-MacBook-Pro"
@@ -18,10 +20,25 @@ nix \
 nix run home-manager/master -- switch --flake .
 ```
 
+## Setup - UTM Linux
+
+```sh
+# Create an image with minimal NixOS installer. Boot into it.
+sudo su
+passwd # Sets a temporary password.
+ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' # Remember Machine's IP.
+
+# On host macOS.
+./scripts/lets-setup.sh # Then Follows instruction.
+
+# For syncing config later.
+./scripts/sync-config.sh $USER <IP>
+```
+
 ## Documentation
 
-- Multiple host configurations are possible. 
-- Each host can have multiple different users. Users are created at OS level. 
+- Multiple host configurations are possible.
+- Each host can have multiple different users. Users are created at OS level.
 - Home manager works on $HOME folders already created.
 - Each user can have multiple different features (used by home-manager) which can be turned on/off at flake level.
 - Software configurations (e.g. vim, ghostty) live in `/extras`.

@@ -6,16 +6,16 @@ set -e
 TARGET_PORT=22
 
 if [ $# -gt 0 ]; then
-	USERNAME="$1"
-	TARGET_ADDRESS="$2"
+  USERNAME="$1"
+  TARGET_ADDRESS="$2"
 else
-	printf "USERNAME: "
-	read USERNAME
+  printf "USERNAME: "
+  read -r USERNAME
 
-	printf "TARGET_ADDRESS: "
-	read TARGET_ADDRESS
+  printf "TARGET_ADDRESS: "
+  read -r TARGET_ADDRESS
 
-	echo "TARGET_PORT: $TARGET_PORT"
+  echo "TARGET_PORT: $TARGET_PORT"
 fi
 
 SSH_OPTIONS="\
@@ -24,5 +24,5 @@ SSH_OPTIONS="\
   -o LogLevel=ERROR"
 
 # Copy this flake into $CONFIG_DIR.
-ssh $SSH_OPTIONS -p$TARGET_PORT \
-	$USERNAME@$TARGET_ADDRESS
+ssh "$SSH_OPTIONS" -p$TARGET_PORT \
+  "$USERNAME@$TARGET_ADDRESS"

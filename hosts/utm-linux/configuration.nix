@@ -5,6 +5,10 @@
     ./user-management.nix
   ];
 
+  # Add proper NIX_PATH variables.
+  programs.zsh.enable = true;
+  programs.fish.enable = true;
+
   # Enable sshd.
   services.openssh = {
     enable = true;

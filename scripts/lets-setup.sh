@@ -6,30 +6,30 @@ set -e
 
 # Make sure all the required dependencies are installed to run this script.
 commands_exist() {
-	for cmd in $1; do
-		command -v "$cmd" >/dev/null 2>&1 || return 1
-	done
-	return 0
+  for cmd in $1; do
+    command -v "$cmd" >/dev/null 2>&1 || return 1
+  done
+  return 0
 }
 
 if ! commands_exist "ssh sshpass rsync"; then
-	echo "some required commands are missing!"
-	exit 1
+  echo "some required commands are missing!"
+  exit 1
 fi
 
 # Enquire credentials.
 printf "TARGET_ADDRESS: "
-read TARGET_ADDRESS
+read -r TARGET_ADDRESS
 
 printf "TARGET_PORT: "
-read TARGET_PORT
+read -r TARGET_PORT
 
 TARGET_USER=root
 echo "TARGET_USER: $TARGET_USER"
 
 stty -echo
 printf "ROOT_PASSWORD: "
-read ROOT_PASSWORD
+read -r ROOT_PASSWORD
 stty echo
 printf "\n"
 
@@ -41,13 +41,13 @@ SSH_OPTIONS="\
   -o LogLevel=ERROR"
 
 run_with_ssh() {
-	sshpass -p $ROOT_PASSWORD \
-		ssh -t $SSH_OPTIONS -p$TARGET_PORT $TARGET_USER@$TARGET_ADDRESS "$@"
+  sshpass -p "$ROOT_PASSWORD" \
+    ssh -t "$SSH_OPTIONS" -p"$TARGET_PORT" "$TARGET_USER@$TARGET_ADDRESS" "$@"
 }
 
 # Important directories.
 SCRIPT_DIR=$(dirname "$0")
-FLAKE_DIR=$(dirname $SCRIPT_DIR)
+FLAKE_DIR=$(dirname "$SCRIPT_DIR")
 SETUP_DIR=/setup
 
 # Prepare the installer environment.
@@ -56,38 +56,43 @@ run_with_ssh "$PREPARE_SCRIPT"
 
 # Copy this flake into $SETUP_DIR.
 rsync -av -e "sshpass -p $ROOT_PASSWORD ssh $SSH_OPTIONS -p$TARGET_PORT" \
-	--quiet \
-	--rsync-path="sudo rsync" \
-	$FLAKE_DIR/ $TARGET_USER@$TARGET_ADDRESS:$SETUP_DIR
+  --quiet \
+  --rsync-path="sudo rsync" \
+  "$FLAKE_DIR/" "$TARGET_USER@$TARGET_ADDRESS:$SETUP_DIR"
 
 # Make scripts executable; they're not marked +x within git to avoid accidentally executing them
 # on my main machine. There's a horror story behind this.
 run_with_ssh "chmod +x $SETUP_DIR/scripts/*.sh"
 
 while true; do
-	echo "\nChoose an option:\n"
+  printf "\nChoose an option:\n"
 
-	echo "1. Prepare /mnt for NixOS installation"
-	echo "2. Install NixOS on machine"
-	echo "3. Reboot"
-	echo "0. SSH into machine"
+  echo "1. Prepare /mnt for NixOS installation"
+  echo "2. Install NixOS on machine"
+  echo "3. Reboot"
+  echo "4. Setup home(-manager)"
+  echo "0. SSH into machine"
 
-	printf "> "
-	read CHOICE
+  printf "> "
+  read -r CHOICE
 
-	case $CHOICE in
-	1)
-		run_with_ssh "$SETUP_DIR/scripts/prepare-mnt.sh"
-		;;
-	2)
-		run_with_ssh "$SETUP_DIR/scripts/install-nixos.sh"
-		;;
-	3)
-		run_with_ssh "reboot"
-		break
-		;;
-	0)
-		run_with_ssh
-		;;
-	esac
+  case $CHOICE in
+  1)
+    run_with_ssh "$SETUP_DIR/scripts/prepare-mnt.sh"
+    ;;
+  2)
+    run_with_ssh "$SETUP_DIR/scripts/install-nixos.sh"
+    ;;
+  3)
+    run_with_ssh "reboot"
+    break
+    ;;
+  4)
+    run_with_ssh "nix run home-manager/master -- switch --flake /etc/nixos"
+    break
+    ;;
+  0)
+    run_with_ssh
+    ;;
+  esac
 done
