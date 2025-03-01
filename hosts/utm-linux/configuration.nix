@@ -25,32 +25,11 @@
   # For WiFi.
   networking.networkmanager.enable = true;
 
-  # Setup Firewall.
-  networking.firewall = {
-    allowedTCPPorts = [ ];
-    allowedUDPPorts = [ ];
-  };
-
   # Install git required for flakes.
   # Once booted & home-manager is run, system git is discarded.
   programs.git = {
     enable = true;
     package = pkgs.gitMinimal;
-  };
-
-  # Setup KDE.
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.displayManager.sddm.settings.General.DisplayServer = "wayland";
-  services.desktopManager.plasma6.enable = true;
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    elisa
-  ];
-
-  # I expect every OS to come with a browser.
-  # Therefore firefox is installed here and not at home-manager level.
-  programs.firefox = {
-    enable = true;
   };
 
   environment.systemPackages = with pkgs; [

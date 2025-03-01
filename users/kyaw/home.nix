@@ -242,7 +242,6 @@ in
 
   imports = [ ]
     ++ (lib.optional features.language-support ./language-support.nix)
-    ++ (lib.optional features.web ./web.nix)
     ++ (lib.optional (builtins.pathExists ./secrets.nix) ./secrets.nix);
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

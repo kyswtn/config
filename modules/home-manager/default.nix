@@ -1,4 +1,4 @@
-{ flakeInputs, ... }: {
+{ ... }: {
   imports = [
     ./1password.nix
     ./home-manager-patches.nix
@@ -6,6 +6,6 @@
     ./orbstack.nix
     ./vscode-patches.nix
     ./vscode-extensions-overlay.nix
-    flakeInputs.plasma-manager.homeManagerModules.plasma-manager
+    # ./plasma-manager.nix
   ];
 }
