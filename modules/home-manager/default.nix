@@ -6,6 +6,5 @@
     ./orbstack.nix
     ./vscode-patches.nix
     ./vscode-extensions-overlay.nix
-    # ./plasma-manager.nix
   ];
 }

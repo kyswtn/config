@@ -42,7 +42,8 @@ nixos-enter -c "\
   chown -R $USERNAME:users /home/$USERNAME/.config && \
   chown -R $USERNAME:users /home/$USERNAME/.local && \
   chown -R $USERNAME:users /home/$USERNAME/$CFG_DIR_NAME/ && \
-  ln -s /home/$USERNAME/$CFG_DIR_NAME/ /etc/nixos
+  ln -s /home/$USERNAME/$CFG_DIR_NAME/ /etc/nixos && \
+  ln -s /home/$USERNAME/$CFG_DIR_NAME/ /home/$USERNAME/.config/home-manager
   "
 
 # Set user password.

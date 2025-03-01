@@ -18,6 +18,10 @@ nix \
 
 # Setup home-manager.
 nix run home-manager/master -- switch --flake .
+
+# Make links so that --flake is not required.
+sudo ln -s /Users/$USER/config /etc/nix-darwin
+sudo ln -s /Users/$USER/config /Users/$USER/.config/home-manager
 ```
 
 ## Setup - UTM Linux
