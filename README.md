@@ -6,6 +6,7 @@ scutil --set LocalHostName "Kyaws-MacBook-Pro"
 
 # Clone the directory. Must always be at `~/config` as some scripts make such an assumption.
 git clone https://github.com/kyswtn/config.git ~/config
+cd ~/config
 
 # Install homebrew.
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -19,7 +20,7 @@ nix \
 # Setup home-manager.
 nix run home-manager/master -- switch --flake .
 
-# Make links so that --flake is not required.
+# Make links so that --flake . is not required afterwards.
 sudo ln -s /Users/$USER/config /etc/nix-darwin
 sudo ln -s /Users/$USER/config /Users/$USER/.config/home-manager
 ```
