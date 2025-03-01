@@ -34,3 +34,16 @@ opt.tabstop = 2 -- Number of spaces tabs count for.
 opt.clipboard = "unnamedplus" -- Use system clipboard.
 opt.ignorecase = true -- Ignore case when searching; use `\C` to force not doing that.
 opt.smartcase = true -- Don't ignore case if search pattern has uppercase.
+
+-- Enable OSC 52.
+vim.g.clipboard = {
+  name = "OSC 52",
+  copy = {
+    ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+    ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+  },
+  paste = {
+    ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+    ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+  },
+}
