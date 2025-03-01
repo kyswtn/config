@@ -104,7 +104,7 @@ in
   # My favourite terminal emulator.
   programs.ghostty = {
     enable = true;
-    package = if isLinux then pkgs.ghostty else null;
+    package = if isDarwin then null else pkgs.ghostty;
     settings = {
       command = "${pkgs.fish}/bin/fish";
       macos-option-as-alt = true;
@@ -154,34 +154,12 @@ in
         auto-format = true;
       };
     };
-    languages = {
-      language = [
-        {
-          name = "yaml";
-          auto-format = true;
-          formatter = { command = "prettierd"; args = [ "_.yaml" ]; };
-        }
-        {
-          name = "nix";
-          auto-format = true;
-          formatter = { command = "nixpkgs-fmt"; args = [ ]; };
-        }
-        {
-          name = "lua";
-          auto-format = true;
-        }
-        {
-          name = "typescript";
-          auto-format = true;
-        }
-      ];
-    };
   };
 
   # I love Visual Studio Code as much as i love Neovim, I also use it as much.
   # Nothing beats Neovim's simplicity. Nothing beats VS Code's extensions.
   programs.vscode = {
-    enable = isLinux;
+    enable = isLinux; # Install via Homebrew on macOS.
     package = pkgs.vscode;
     extensions = with vscode-marketplace; [
       vscodevim.vim
@@ -229,26 +207,13 @@ in
     # https://opensource.apple.com/source/netcat/netcat-49.40.1/netcat.c
     netcat-gnu
 
-    # Most add syntax-highlighting to man pages which i really like.
-    most
-
-    # TUI markdown viewer and markdown LSP.
-    glow
-    marksman
-
     # When I need to pipe a password to SSH directly from 1password without typing it in.
     sshpass
-
-    # Colorful hexdump.
-    _0x
 
     # I like `xh :PORT` a lot; saves tons of time having to type `http://localhost:PORT`
     # and hurl replaces postman for me. Thinking about postman gives me PTSD.
     xh
     hurl
-
-    # I use this for reviewing PRs. Less commands to type.
-    gh
 
     # I use nerd fonts separately, instead of patched versions. Thanks ghostty!
     nerd-fonts.symbols-only
@@ -257,33 +222,27 @@ in
     tree-sitter
     lldb
 
-    # Nix LSP & formatter.
-    nil
-    nixpkgs-fmt
+    # System languages.
+    zig
+    zls
+    rustup
 
-    # Bash LSP & formatter.
-    bash-language-server
-    shfmt
+    # Colorful hexdump.
+    _0x
 
-    # Lua LSP & formatter.
-    lua-language-server
-    stylua
+    # JS runtimes.
+    bun
+    nodejs_22
 
-    # Other language servers & formatters.
-    yaml-language-server
-    prettierd
-    biome
-    dockerfile-language-server-nodejs
-
-    # I don't use this anymore, but needs it for formatting.
-    terraform
+    # I use this for reviewing PRs and also for `gh browse`. Less commands to type, much convenient.
+    gh
   ]
   ++ (lib.optional isDarwin darwin.trash)
   ++ (lib.optional isLinux trash-cli);
 
   imports = [ ]
+    ++ (lib.optional features.language-support ./language-support.nix)
     ++ (lib.optional features.web ./web.nix)
-    ++ (lib.optional features.systems ./systems.nix)
     ++ (lib.optional (builtins.pathExists ./secrets.nix) ./secrets.nix);
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

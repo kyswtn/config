@@ -4,6 +4,8 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       stop_after_first = true,
+      notify_on_error = false,
+      notify_no_formatters = false,
       formatters_by_ft = {
         lua = { "stylua" },
         nix = { "nixpkgs_fmt" },
