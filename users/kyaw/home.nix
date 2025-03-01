@@ -214,13 +214,18 @@ in
     # I use nerd fonts separately, instead of patched versions. Thanks ghostty!
     nerd-fonts.symbols-only
 
-    # Required by neovim & helix for DAP.
+    # Required by neovim and helix for syntax-highlighting and DAP.
     tree-sitter
     lldb
 
     # System languages.
+    # C.
+    gnumake
+    gcc
+    # Zig.
     zig
     zls
+    # Rust.
     rustup
 
     # Colorful hexdump.
