@@ -14,6 +14,12 @@ in
     includes = [ "~/.ssh/extra_config" ];
   };
 
+  # If you know exactly what you're doing, enable this SSH key on host to allow PUBLICLY COMMITTED
+  # private key access. Meant to be only for testing purposes. You should never need this.
+  # Fingers crossed I won't ever make a typo and expose my infrastructure public.
+  home.file.".ssh/local_ssh".source =
+    mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/local_ssh";
+
   programs.gpg = {
     enable = true;
     package = pkgs.gnupg;

@@ -124,7 +124,7 @@
   "editor.fontFamily": "Monolisa, Menlo",
   "editor.fontSize": 15,
   "editor.fontWeight": "400",
-  "editor.letterSpacing": -0.75,
+  "editor.letterSpacing": -0.5,
   "editor.lineHeight": 1.5,
   "workbench.fontAliasing": "default",
   // Editor looks, tweaked all the times.
@@ -167,5 +167,9 @@
   "[go]": {
     "editor.tabSize": 4
   },
-  "nix.formatterPath": "nixpkgs-fmt"
+  "nix.formatterPath": "nixpkgs-fmt",
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  "remote.SSH.configFile": "~/.ssh/extra_config"
 }

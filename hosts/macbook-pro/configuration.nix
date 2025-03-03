@@ -69,6 +69,7 @@
       "spotify"
       "tailscale"
       "discord"
+      "notion"
     ];
   };
 

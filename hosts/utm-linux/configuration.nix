@@ -32,6 +32,9 @@
     package = pkgs.gitMinimal;
   };
 
+  # Patch dynamic-linking to make vscode-server work.
+  programs.nix-ld.enable = true;
+
   environment.systemPackages = with pkgs; [
     # These are utilities i wish every OS comes with, therefore installed here and
     # not at home-manager level.
