@@ -52,7 +52,9 @@
   # Homebrew.
   homebrew = {
     enable = true;
-    brews = [ ];
+    brews = [
+      "swift-format"
+    ];
     casks = [
       "appcleaner"
       "raycast"
@@ -70,6 +72,7 @@
       "tailscale"
       "discord"
       "notion"
+      "telegram"
     ];
   };
 

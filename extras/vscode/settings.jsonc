@@ -62,7 +62,9 @@
   "editor.minimap.enabled": false,
   "editor.renderWhitespace": "selection",
   // https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md
-  "editor.rulers": [100],
+  "editor.rulers": [
+    100
+  ],
   "editor.scrollBeyondLastLine": true,
   "editor.scrollBeyondLastColumn": 0,
   // Smooth animations.
@@ -104,35 +106,57 @@
   "vim.leader": " ",
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": ["<leader>", "e"],
-      "commands": ["workbench.action.toggleSidebarVisibility"]
+      "before": [
+        "<leader>",
+        "e"
+      ],
+      "commands": [
+        "workbench.action.toggleSidebarVisibility"
+      ]
     },
     {
-      "before": ["<leader>", "a"],
-      "commands": ["editor.action.quickFix"]
+      "before": [
+        "<leader>",
+        "a"
+      ],
+      "commands": [
+        "editor.action.quickFix"
+      ]
     },
     {
-      "before": ["<leader>", "r"],
-      "commands": ["editor.action.rename"]
+      "before": [
+        "<leader>",
+        "r"
+      ],
+      "commands": [
+        "editor.action.rename"
+      ]
     },
     {
-      "before": ["g", "r"],
-      "commands": ["editor.action.goToReferences"]
+      "before": [
+        "g",
+        "r"
+      ],
+      "commands": [
+        "editor.action.goToReferences"
+      ]
     }
   ],
   // Editor font.
-  "editor.fontFamily": "Monolisa, Menlo",
+  "editor.fontFamily": "andale mono",
   "editor.fontSize": 15,
   "editor.fontWeight": "400",
   "editor.letterSpacing": -0.5,
   "editor.lineHeight": 1.5,
   "workbench.fontAliasing": "default",
   // Editor looks, tweaked all the times.
-  "workbench.colorTheme": "poimandres-noitalics",
+  "workbench.colorTheme": "Default High Contrast",
   "workbench.iconTheme": "vscode-icons",
   "workbench.productIconTheme": "icons-carbon",
   // Load custom css.
-  "vscode_custom_css.imports": ["file:///Users/Shared/.vscode/custom.css"],
+  "vscode_custom_css.imports": [
+    "file:///Users/Shared/.vscode/custom.css"
+  ],
   "vscode_custom_css.statusbar": false,
   // File formatters and language specific settings.
   "editor.codeActionsOnSave": {
@@ -167,9 +191,21 @@
   "[go]": {
     "editor.tabSize": 4
   },
+  "[swift]": {
+    "editor.defaultFormatter": "vknabel.vscode-apple-swift-format"
+  },
+  "[yaml][yml][dockercompose]": {
+    "editor.guides.indentation": true
+  },
   "nix.formatterPath": "nixpkgs-fmt",
+  // The rest.
   "tailwindCSS.experimental.classRegex": [
-    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+    [
+      "cva\\(([^)]*)\\)",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ]
   ],
-  "remote.SSH.configFile": "~/.ssh/extra_config"
+  "remote.SSH.configFile": "~/.ssh/extra_config",
+  "lldb.library": "/Library/Developer/CommandLineTools/Library/PrivateFrameworks/LLDB.framework/Versions/A/LLDB",
+  "lldb.launch.expressions": "native"
 }

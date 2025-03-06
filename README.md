@@ -37,7 +37,7 @@ ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' # Remember Machi
 ./scripts/lets-setup.sh # Then Follows instruction.
 
 # For syncing config later.
-./scripts/sync-config.sh $USER <IP>
+./scripts/sync-config.sh $USER "<IP>"
 ```
 
 ## Documentation

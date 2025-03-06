@@ -1,4 +1,4 @@
-{ lib, modulesPath, ... }:
+{ config, lib, modulesPath, ... }:
 {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
   boot = {
@@ -16,6 +16,16 @@
     "/boot" = {
       device = "/dev/disk/by-label/boot";
       fsType = "vfat";
+    };
+    "/mnt/mac" = {
+      device = "share"; # UTM's default qemu_mount_tag is "share".
+      fsType = "9p";
+      options = [
+        "trans=virtio"
+        "version=9p2000.L"
+        "nofail"
+        "rw"
+      ];
     };
   };
   swapDevices = [
