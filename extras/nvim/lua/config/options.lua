@@ -2,7 +2,6 @@ local opt = vim.opt
 
 -- Syntax highlighting.
 opt.termguicolors = true -- True color support.
-vim.cmd("syntax off") -- Turn default syntax highlighting off and use treesitter's.
 
 -- Line numbers.
 opt.relativenumber = true -- Use relative line numbers.
@@ -34,18 +33,4 @@ opt.tabstop = 2 -- Number of spaces tabs count for.
 opt.clipboard = "unnamedplus" -- Use system clipboard.
 opt.ignorecase = true -- Ignore case when searching; use `\C` to force not doing that.
 opt.smartcase = true -- Don't ignore case if search pattern has uppercase.
-
--- Enable OSC 52 on Linux.
-if vim.uv.os_uname().sysname == "Linux" then
-  vim.g.clipboard = {
-    name = "OSC 52",
-    copy = {
-      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-    },
-    paste = {
-      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
-    },
-  }
-end
+opt.autochdir = true

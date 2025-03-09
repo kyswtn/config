@@ -53,6 +53,8 @@
   homebrew = {
     enable = true;
     brews = [
+      "llvm"
+      "lld"
       "swift-format"
     ];
     casks = [
@@ -63,6 +65,7 @@
       "ghostty"
       "zen-browser"
       "obsidian"
+      "iina"
       "visual-studio-code"
       "utm"
       "orbstack"

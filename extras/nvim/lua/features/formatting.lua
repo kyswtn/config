@@ -17,6 +17,7 @@ return {
         typescriptreact = { "biome", "prettierd" },
         javascript = { "biome", "prettierd" },
         javascriptreact = { "biome", "prettierd" },
+        swift = { "swift_format" },
         -- Biome doesn't support these properly yet.
         markdown = { "prettierd" },
         astro = { "prettierd" },

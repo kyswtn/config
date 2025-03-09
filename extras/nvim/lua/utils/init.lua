@@ -19,11 +19,6 @@ M.in_a_git_repo = function()
   return in_worktree[1] ~= "true"
 end
 
-M.get_git_root = function()
-  local dot_git_path = vim.fn.finddir(".git", ".;")
-  return vim.fn.fnamemodify(dot_git_path, ":h")
-end
-
 M.call_telescope = function(cmd, opts)
   return function()
     local telescope = require("telescope.builtin")

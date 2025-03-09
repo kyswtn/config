@@ -1,7 +1,7 @@
 return {
   {
     "m4xshen/hardtime.nvim",
-    enabled = false,
+    enabled = true,
     event = "VeryLazy",
     opts = {
       disabled_filetypes = {

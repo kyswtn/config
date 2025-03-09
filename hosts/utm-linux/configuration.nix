@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -24,6 +24,12 @@
 
   # For WiFi.
   networking.networkmanager.enable = true;
+  networking.firewall = {
+    allowedTCPPorts = [
+      config.services.kubernetes.apiserver.securePort
+    ];
+    allowedUDPPorts = [ ];
+  };
 
   # Install git required for flakes.
   # Once booted & home-manager is run, system git is discarded.
@@ -41,6 +47,11 @@
     xclip
     killall
   ];
+
+  # Kubalwkeranehetes.
+  services.k3s = {
+    enable = true;
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

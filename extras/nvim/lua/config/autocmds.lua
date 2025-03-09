@@ -2,6 +2,14 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("custom_" .. name, { clear = true })
 end
 
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    if vim.fn.argv(0) == "" or vim.fn.argv(0) == "." then
+      require("telescope.builtin").find_files()
+    end
+  end,
+})
+
 -- Disable semantic token to prevent flashing.
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
@@ -57,15 +65,3 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
   group = augroup("filetype"),
 })
-
--- Command to toggle inline diagnostics
-vim.api.nvim_create_user_command("DiagnosticsToggleVirtualText", function()
-  local current_value = vim.diagnostic.config().virtual_text
-  vim.diagnostic.config({ virtual_text = not current_value })
-end, {})
-
--- Command to toggle diagnostics
-vim.api.nvim_create_user_command("DiagnosticsToggle", function()
-  local current_value = vim.diagnostic.is_enabled()
-  vim.diagnostic.enable(not current_value)
-end, {})

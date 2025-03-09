@@ -225,9 +225,6 @@ in
     lldb
 
     # System languages.
-    # C.
-    gnumake
-    gcc
     # Zig.
     zig
     zls

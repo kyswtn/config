@@ -74,6 +74,15 @@ return {
         gopls = {},
         golangci_lint_ls = {},
         terraformls = {},
+        sourcekit = {
+          capabilities = {
+            workspace = {
+              didChangeWatchedFiles = {
+                dynamicRegistration = true,
+              },
+            },
+          },
+        },
         biome = {},
         rust_analyzer = {
           settings = {
