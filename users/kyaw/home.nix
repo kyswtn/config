@@ -14,8 +14,7 @@ in
     includes = [ "~/.ssh/extra_config" ];
   };
 
-  # If you know exactly what you're doing, enable this SSH key on host to allow PUBLICLY COMMITTED
-  # private key access. Meant to be only for testing purposes. You should never need this.
+  # PUBLICLY COMMITTED private key to only be used for testing purposes.
   # Fingers crossed I won't ever make a typo and expose my infrastructure public.
   home.file.".ssh/local_ssh".source =
     mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/local_ssh";
@@ -54,9 +53,21 @@ in
     ];
   };
 
-  # On macOS I don't chsh. I just use my terminal emulator to specify fish as main program.
+  # Ghostty is the only terminal to work flawlessly with OSC 52 & DEC mode 2031.
+  programs.ghostty = {
+    enable = true;
+    package = if isDarwin then null else pkgs.ghostty;
+    settings = {
+      command = "${pkgs.fish}/bin/fish";
+      macos-option-as-alt = true;
+      # I'm modifying Ghotty config a lot and i don't want
+      # to have to reload home-manager always, therefore this symlink.
+      config-file = "${thisFlakeAbsolutePath}/extras/ghostty.conf";
+    };
+  };
+
+  # On macOS I don't chsh. I just use fish as main program for terminal/tmux/zellij.
   # That way I won't be locked out in case fish breaks.
-  programs.fzf.enable = true;
   programs.fish = {
     enable = true;
     package = pkgs.fish;
@@ -103,17 +114,8 @@ in
     '';
   };
 
-  # My favourite terminal emulator.
-  programs.ghostty = {
+  programs.fzf = {
     enable = true;
-    package = if isDarwin then null else pkgs.ghostty;
-    settings = {
-      command = "${pkgs.fish}/bin/fish";
-      macos-option-as-alt = true;
-      # I'm beta-testing ghostty so i'm modifying the config a lot and i don't want
-      # to have to reload home-manager always, therefore this symlink.
-      config-file = "${thisFlakeAbsolutePath}/extras/ghostty.conf";
-    };
   };
 
   # Switch shell envs based on directory.
@@ -124,10 +126,13 @@ in
       enable = true;
       package = pkgs.nix-direnv;
     };
+    config = {
+      log_format = "";
+    };
   };
 
   # I don't use nix to manage neovim config, because i want to be able to use
-  # neovim outside of nix; also because i really like lazy.nvim.
+  # neovim outside of nix; also because lazy.nvim works really well.
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-unwrapped;
@@ -135,12 +140,6 @@ in
   };
   xdg.configFile."nvim".source =
     mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/nvim";
-
-  # I don't have a lot of git integrations configured in neovim. I use GitUI.
-  programs.gitui = {
-    enable = true;
-    package = pkgs.gitui;
-  };
 
   # Helix is mostly here because i really like `--health` function which is like mason.nvim but 
   # outside of nvim where it actually makes sense because LSPs & formatters should be shared 
@@ -179,12 +178,9 @@ in
     keybindingsFile = "${thisFlakeAbsolutePath}/extras/vscode/keybindings.jsonc";
   };
 
-  # Orbstack replaces docker for me. I also use LXC machines a lot because they're faster and 
-  # easier to spin up than traditional VMs.
-  programs.orbstack = {
-    enable = isDarwin;
-    package = null;
-  };
+  # Sketchybar for macOS menu bar.
+  xdg.configFile."sketchybar".source =
+    mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/sketchybar";
 
   home.packages = with pkgs; [
     # I feel like all unix users expect me to have these.
@@ -217,8 +213,10 @@ in
     xh
     hurl
 
-    # I use nerd fonts separately, instead of patched versions. Thanks ghostty!
+    # Fonts.
     nerd-fonts.symbols-only
+    geist-font
+    nerd-fonts.geist-mono
 
     # Required by neovim and helix for syntax-highlighting and DAP.
     tree-sitter
@@ -240,6 +238,13 @@ in
 
     # I use this for reviewing PRs and also for `gh browse`. Less commands to type, much convenient.
     gh
+
+    # For python slop. 
+    uv
+
+    # For OSDev.
+    libisoburn
+
   ]
   ++ (lib.optional isDarwin darwin.trash)
   ++ (lib.optional isLinux trash-cli);

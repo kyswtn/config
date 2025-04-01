@@ -121,7 +121,7 @@
     }
   ],
   // Editor font.
-  "editor.fontFamily": "input mono",
+  "editor.fontFamily": "Jetbrains Mono",
   "editor.fontSize": 16,
   "editor.fontWeight": "400",
   "editor.letterSpacing": -0.5,
@@ -129,8 +129,8 @@
   "workbench.fontAliasing": "default",
   // Editor looks, tweaked all the times.
   "window.autoDetectColorScheme": true,
-  "workbench.preferredLightColorTheme": "Rosé Pine Dawn (no italics)",
-  "workbench.preferredDarkColorTheme": "Rosé Pine (no italics)",
+  "workbench.preferredLightColorTheme": "Visual Studio Dark",
+  "workbench.preferredDarkColorTheme": "Quiet Light",
   "workbench.iconTheme": "vs-minimal",
   "workbench.productIconTheme": "Default",
   // Load custom css.

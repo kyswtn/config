@@ -56,6 +56,10 @@
       "llvm"
       "lld"
       "swift-format"
+      {
+        name = "FelixKratz/homebrew-formulae/sketchybar";
+        start_service = true;
+      }
     ];
     casks = [
       "appcleaner"
@@ -76,6 +80,7 @@
       "discord"
       "notion"
       "telegram"
+      "zoom"
     ];
   };
 
