@@ -37,8 +37,14 @@
             users = [ "kyaw" ];
             selected-features = [ "language-support" ];
           };
-          utm-linux = {
+          aarch64-linux = {
             system = "aarch64-linux";
+            managed-by = "nixos";
+            users = [ "kyaw" ];
+            selected-features = [ "language-support" ];
+          };
+          amd64-linux = {
+            system = "x86_64-linux";
             managed-by = "nixos";
             users = [ "kyaw" ];
             selected-features = [ "language-support" ];

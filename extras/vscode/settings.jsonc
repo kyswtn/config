@@ -62,7 +62,9 @@
   "editor.minimap.enabled": false,
   "editor.renderWhitespace": "selection",
   // https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md
-  "editor.rulers": [100],
+  "editor.rulers": [
+    100
+  ],
   "editor.scrollBeyondLastLine": true,
   "editor.scrollBeyondLastColumn": 0,
   // Smooth animations.
@@ -104,25 +106,45 @@
   "vim.leader": " ",
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": ["<leader>", "e"],
-      "commands": ["workbench.action.toggleSidebarVisibility"]
+      "before": [
+        "<leader>",
+        "e"
+      ],
+      "commands": [
+        "workbench.action.toggleSidebarVisibility"
+      ]
     },
     {
-      "before": ["<leader>", "a"],
-      "commands": ["editor.action.quickFix"]
+      "before": [
+        "<leader>",
+        "a"
+      ],
+      "commands": [
+        "editor.action.quickFix"
+      ]
     },
     {
-      "before": ["<leader>", "r"],
-      "commands": ["editor.action.rename"]
+      "before": [
+        "<leader>",
+        "r"
+      ],
+      "commands": [
+        "editor.action.rename"
+      ]
     },
     {
-      "before": ["g", "r"],
-      "commands": ["editor.action.goToReferences"]
+      "before": [
+        "g",
+        "r"
+      ],
+      "commands": [
+        "editor.action.goToReferences"
+      ]
     }
   ],
   // Editor font.
-  "editor.fontFamily": "Jetbrains Mono",
-  "editor.fontSize": 16,
+  "editor.fontFamily": "Agave",
+  "editor.fontSize": 22,
   "editor.fontWeight": "400",
   "editor.letterSpacing": -0.5,
   "editor.lineHeight": 1.45,
@@ -130,11 +152,13 @@
   // Editor looks, tweaked all the times.
   "window.autoDetectColorScheme": true,
   "workbench.preferredLightColorTheme": "Visual Studio Dark",
-  "workbench.preferredDarkColorTheme": "Quiet Light",
+  "workbench.preferredDarkColorTheme": "Rosé Pine Moon (no italics)",
   "workbench.iconTheme": "vs-minimal",
   "workbench.productIconTheme": "Default",
   // Load custom css.
-  "vscode_custom_css.imports": ["file:///Users/Shared/.vscode/custom.css"],
+  "vscode_custom_css.imports": [
+    "file:///Users/Shared/.vscode/custom.css"
+  ],
   "vscode_custom_css.statusbar": false,
   // File formatters and language specific settings.
   "editor.codeActionsOnSave": {
@@ -176,11 +200,20 @@
     "editor.guides.indentation": true
   },
   "nix.formatterPath": "nixpkgs-fmt",
+  // Remote SSH.
+  "remote.SSH.configFile": "~/.ssh/extra_config",
+  "remote.SSH.useLocalServer": false,
+  "remote.SSH.remotePlatform": {
+    "utm-linux": "linux"
+  },
+  // LLDB.
+  "lldb.launch.expressions": "native",
+  "lldb.library": "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB",
   // The rest.
   "tailwindCSS.experimental.classRegex": [
-    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
-  ],
-  "remote.SSH.configFile": "~/.ssh/extra_config",
-  "lldb.library": "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB",
-  "lldb.launch.expressions": "native"
+    [
+      "cva\\(([^)]*)\\)",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ]
+  ]
 }

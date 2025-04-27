@@ -3,6 +3,9 @@
   # By the way ’ here is not ' otherwise nix-darwin errors.
   networking.computerName = "Kyaw’s MacBook Pro";
 
+  # Tell nixblds' to use 1Password SSH agent for remote store/builders/substituters.
+  nix.envVars.SSH_AUTH_SOCK = "/Users/kyaw/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+
   # Add proper NIX_PATH variables.
   programs.bash.enable = true;
   programs.zsh.enable = true;
@@ -52,14 +55,13 @@
   # Homebrew.
   homebrew = {
     enable = true;
+    taps = [
+      "railwaycat/emacsmacport"
+    ];
     brews = [
       "llvm"
       "lld"
       "swift-format"
-      {
-        name = "FelixKratz/homebrew-formulae/sketchybar";
-        start_service = true;
-      }
     ];
     casks = [
       "appcleaner"
@@ -81,6 +83,9 @@
       "notion"
       "telegram"
       "zoom"
+      "brave-browser"
+      "emacs-mac"
+      "legcord"
     ];
   };
 

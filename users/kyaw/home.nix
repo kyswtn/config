@@ -46,7 +46,8 @@ in
   programs._1password = {
     enable = true;
     cli.enable = true;
-    enableSshAgent = true;
+    # I'm using SSH Agent forward on the only Linux VM I have atm, so no need for SSH_AUTH_SOCK.
+    enableSshAgent = isDarwin;
     enableGitSigning = true;
     sshKeys = [
       { vault = "Personal"; item = "SSH Key"; }
@@ -162,7 +163,7 @@ in
   programs.vscode = {
     enable = isLinux; # Install via Homebrew on macOS.
     package = pkgs.vscode;
-    extensions = with vscode-marketplace; [
+    profiles.default.extensions = with vscode-marketplace; [
       vscodevim.vim
       mkhl.direnv
       frenco.vscode-vercel
@@ -178,9 +179,13 @@ in
     keybindingsFile = "${thisFlakeAbsolutePath}/extras/vscode/keybindings.jsonc";
   };
 
-  # Sketchybar for macOS menu bar.
-  xdg.configFile."sketchybar".source =
-    mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/sketchybar";
+  # Emacs.
+  xdg.configFile."emacs".source =
+    mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/emacs";
+
+  # Flow - might become my favourite text editor.
+  xdg.configFile."flow".source =
+    mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/flow";
 
   home.packages = with pkgs; [
     # I feel like all unix users expect me to have these.
@@ -229,8 +234,11 @@ in
     # Rust.
     rustup
 
+    # Favourite emulator.
+    qemu
+
     # Colorful hexdump.
-    _0x
+    # _0x
 
     # JS runtimes.
     bun
@@ -240,11 +248,10 @@ in
     gh
 
     # For python slop. 
-    uv
+    # uv
 
     # For OSDev.
-    libisoburn
-
+    # libisoburn
   ]
   ++ (lib.optional isDarwin darwin.trash)
   ++ (lib.optional isLinux trash-cli);

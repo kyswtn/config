@@ -9,3 +9,8 @@ secrets.nix
 # ignore all vim generated files except vimrc
 /extras/vim/*
 !/extras/vim/vimrc
+
+# ignore all emacs generated files
+/extras/emacs/*
+!/extras/emacs/init.el
+!/extras/emacs/early-init.el

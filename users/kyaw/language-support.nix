@@ -32,8 +32,8 @@
     yaml-language-server
     dockerfile-language-server-nodejs
 
-    # I've switched to OpenTofu, but still needs Terraform for formatting.
-    terraform
+    # I've switched to OpenTofu, but sometimes need Terraform for formatting.
+    # terraform
   ];
 
   # Helix doesn't come with auto-format for most languages, but I love auto-format on save.

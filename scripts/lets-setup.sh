@@ -42,7 +42,7 @@ SSH_OPTIONS="\
 
 run_with_ssh() {
   sshpass -p "$ROOT_PASSWORD" \
-    ssh -t "$SSH_OPTIONS" -p"$TARGET_PORT" "$TARGET_USER@$TARGET_ADDRESS" "$@"
+    ssh -t $SSH_OPTIONS -p$TARGET_PORT "$TARGET_USER@$TARGET_ADDRESS" "$@"
 }
 
 # Important directories.
