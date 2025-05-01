@@ -59,7 +59,7 @@ in
     enable = true;
     package = if isDarwin then null else pkgs.ghostty;
     settings = {
-      command = "${pkgs.fish}/bin/fish";
+      command = "${pkgs.zellij}/bin/zellij options --default-shell ${pkgs.fish}/bin/fish";
       macos-option-as-alt = true;
       # I'm modifying Ghotty config a lot and i don't want
       # to have to reload home-manager always, therefore this symlink.
@@ -131,6 +131,13 @@ in
       log_format = "";
     };
   };
+
+  programs.zellij = {
+    enable = true;
+    settings = { };
+  };
+  xdg.configFile."zellij".source =
+    mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/zellij";
 
   # I don't use nix to manage neovim config, because i want to be able to use
   # neovim outside of nix; also because lazy.nvim works really well.
@@ -246,6 +253,9 @@ in
 
     # I use this for reviewing PRs and also for `gh browse`. Less commands to type, much convenient.
     gh
+
+    # Browser in TUI?
+    browsh
 
     # For python slop. 
     # uv

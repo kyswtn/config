@@ -57,11 +57,13 @@
     enable = true;
     taps = [
       "railwaycat/emacsmacport"
+      "kamillobinski/thock"
     ];
     brews = [
       "llvm"
       "lld"
       "swift-format"
+      "thock"
     ];
     casks = [
       "appcleaner"
@@ -86,6 +88,8 @@
       "brave-browser"
       "emacs-mac"
       "legcord"
+      "obs"
+      "firefox"
     ];
   };
 

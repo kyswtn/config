@@ -12,6 +12,22 @@ return {
           section_separators = "",
           component_separators = "",
         },
+        sections = {
+          lualine_a = {
+            "mode",
+          },
+          lualine_b = {
+            { "branch", icon = { "", align = "left" } },
+            "diff",
+            "diagnostics",
+          },
+          lualine_c = { "filename" },
+          lualine_x = { "encoding" },
+          lualine_y = {},
+          lualine_z = {
+            "location",
+          },
+        },
       }
     end,
   },

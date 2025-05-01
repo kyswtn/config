@@ -1,0 +1,22 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+              format_left  "{tabs}"
+              format_right "{mode}"
+              format_space "#[bg=#282828]"
+
+              mode_normal ""
+              mode_search "#[fg=#D4BE98,bg=#282828]search "
+              mode_scroll "#[fg=#D4BE98,bg=#282828]scroll "
+              mode_tmux   "#[fg=#D4BE98,bg=#282828]ctrl+b "
+
+              hide_frame_for_single_pane "true"
+
+              tab_normal   "#[fg=#D4BE98,bg=#282828] {name} "
+              tab_active   "#[fg=#1E2021,bg=#A79A84,bold] {name} "
+            }
+        }
+        children
+    }
+}

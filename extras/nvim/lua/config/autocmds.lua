@@ -4,9 +4,11 @@ end
 
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
-    if vim.fn.argv(0) == "" or vim.fn.argv(0) == "." then
-      require("telescope.builtin").find_files()
-    end
+    -- if vim.fn.argv(0) == "" or vim.fn.argv(0) == "." then
+    --   require("telescope.builtin").find_files()
+    -- end
+
+    vim.diagnostic.config({ virtual_text = false, underline = false })
   end,
 })
 
@@ -39,6 +41,25 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   group = augroup("linter"),
 })
 
+-- Set shiftwidth and tabstop for *.go files.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.tabstop = 4
+  end,
+  group = augroup("filetype"),
+})
+
+-- Disable ' pair completions for Rust.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "rust",
+  callback = function()
+    vim.keymap.set("i", "'", "'", { buffer = 0 })
+  end,
+  group = augroup("filetype"),
+})
+
 -- Custom file type associations.
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "flake.lock",
@@ -54,14 +75,4 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     vim.cmd("set filetype=zig")
   end,
   group = augroup("filetypedetect"),
-})
-
--- Set shiftwidth and tabstop for *.go files.
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
-  callback = function()
-    vim.opt_local.shiftwidth = 4
-    vim.opt_local.tabstop = 4
-  end,
-  group = augroup("filetype"),
 })

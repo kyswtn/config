@@ -49,7 +49,6 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsea
 -- Terminal. By the way does anyone actually remembers <C-\\><C-n>?
 map("t", "<Esc>", "<C-\\><C-n>", { desc = "Escape from terminal to normal mode" })
 
--- Keybinding to toggle inline diagnostics (ii)
+-- Keybinding to toggle inline diagnostics
 map("n", "<Leader>ii", ':lua vim.cmd("DiagnosticsToggleVirtualText")<CR>', { noremap = true, silent = true })
--- Keybinding to toggle diagnostics (id)
 map("n", "<Leader>id", ':lua vim.cmd("DiagnosticsToggle")<CR>', { noremap = true, silent = true })

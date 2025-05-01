@@ -1,5 +1,5 @@
 # frame_rate 60
-# theme "default"
+theme "gruvbox-dark-hard"
 input_mode "vim"
 # gutter_line_numbers_mode null
 # gutter_line_numbers_style "ascii"

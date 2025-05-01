@@ -19,8 +19,8 @@ opt.laststatus = 3 -- Only use 1 shared status bar.
 opt.splitbelow = true -- Horizontal splits open to the bottom.
 opt.splitright = true -- Vertical splits open to the right.
 opt.cursorline = true -- Highlight current line.
-opt.signcolumn = "yes" -- Don't hide sign column (column before numbers line) by default.
-opt.colorcolumn = "100" -- Add a ruler at print width 100. Shoutout to TIGER_STYLE by tigerbeetle.
+opt.signcolumn = "yes:1" -- Don't hide sign column (column before numbers line) by default.
+-- opt.colorcolumn = "100" -- Add a ruler at print width 100. Shoutout to TIGER_STYLE by tigerbeetle.
 
 -- Indentation.
 opt.expandtab = true -- Use spaces instead of tabs.

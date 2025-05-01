@@ -1,0 +1,66 @@
+theme "gruvbox-dark"
+
+simplified_ui  true
+pane_frames false
+default_layout "compact"
+default_mode "locked"
+show_startup_tips false
+show_release_notes false
+
+ui {
+  pane_frames {
+    hide_session_name  true
+  }
+}
+
+keybinds clear-defaults=true {
+  locked {
+    bind "Ctrl b" { SwitchToMode "Tmux"; }
+  }
+  tmux {
+    bind "Enter" { SwitchToMode "Locked"; }
+    bind "Esc" { SwitchToMode "Locked"; }
+
+    bind "c" { NewTab; SwitchToMode "Locked"; }
+    bind "p" { GoToPreviousTab; SwitchToMode "Locked"; }
+    bind "n" { GoToNextTab; SwitchToMode "Locked"; }
+    bind "x" { CloseFocus; SwitchToMode "Locked"; }
+    bind "," { SwitchToMode "RenameTab"; TabNameInput 0; }
+
+    bind "\"" { NewPane "Down"; SwitchToMode "Locked"; }
+    bind "%" { NewPane "Right"; SwitchToMode "Locked"; }
+    bind "h" { MoveFocus "Left"; SwitchToMode "Locked"; }
+    bind "l" { MoveFocus "Right"; SwitchToMode "Locked"; }
+    bind "j" { MoveFocus "Down"; SwitchToMode "Locked"; }
+    bind "k" { MoveFocus "Up"; SwitchToMode "Locked"; }
+
+    bind "[" { SwitchToMode "Scroll"; }
+  }
+  renametab {
+      bind "Enter" { SwitchToMode "Locked"; }
+      bind "Esc" { UndoRenameTab; SwitchToMode "Locked"; }
+  }
+  scroll {
+      bind "Ctrl c" "Esc" { ScrollToBottom; SwitchToMode "Locked"; }
+      bind "j" "Down" { ScrollDown; }
+      bind "k" "Up" { ScrollUp; }
+      bind "s" { SwitchToMode "EnterSearch"; SearchInput 0; }
+      bind "e" { EditScrollback; SwitchToMode "Locked"; }
+  }
+  entersearch {
+      bind "Ctrl c" "Esc" { SwitchToMode "Scroll"; }
+      bind "Enter" { SwitchToMode "Search"; }
+  }
+  search {
+      bind "Ctrl c" "Esc" { ScrollToBottom; SwitchToMode "Locked"; }
+      bind "j" "Down" { ScrollDown; }
+      bind "k" "Up" { ScrollUp; }
+      bind "n" { Search "down"; }
+      bind "p" { Search "up"; }
+      bind "/" { SwitchToMode "EnterSearch"; }
+
+      bind "c" { SearchToggleOption "CaseSensitivity"; }
+      bind "w" { SearchToggleOption "Wrap"; }
+      bind "o" { SearchToggleOption "WholeWord"; }
+  }
+}
