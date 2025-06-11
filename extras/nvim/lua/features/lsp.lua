@@ -87,6 +87,9 @@ return {
         rust_analyzer = {
           settings = {
             ["rust-analyzer"] = {
+              cargo = {
+                features = "all",
+              },
               files = {
                 -- Otherwise, rust-analyzer get's excruciatingly slow.
                 excludeDirs = { ".direnv", "node_modules" },

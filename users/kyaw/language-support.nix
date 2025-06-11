@@ -15,6 +15,18 @@
     lua-language-server
     stylua
 
+    # Rust LSP & formatter, picked out from rustup toolchain.
+    (linkFarm "rustup" [
+      {
+        name = "bin/rust-analyzer";
+        path = "${rustup}/bin/rust-analyzer";
+      }
+      {
+        name = "bin/rustfmt";
+        path = "${rustup}/bin/rustfmt";
+      }
+    ])
+
     # TUI markdown viewer and markdown LSP.
     glow
     marksman

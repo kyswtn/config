@@ -64,3 +64,4 @@ keybinds clear-defaults=true {
       bind "o" { SearchToggleOption "WholeWord"; }
   }
 }
+

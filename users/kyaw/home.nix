@@ -87,6 +87,9 @@ in
       # Without this Ctrl-Z and fg don't work.
       set -Ux tide_jobs_number_threshold 1
 
+      # Disable command_duration.
+      set --universal tide_right_prompt_items (string match -rv cmd_duration $tide_right_prompt_items)
+
       # If tide is not configured; configure it.
       if not set -q tide_character_icon
         tide configure \
@@ -190,7 +193,7 @@ in
   xdg.configFile."emacs".source =
     mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/emacs";
 
-  # Flow - might become my favourite text editor.
+  # Flow - has the potential to become my next favourite text editor.
   xdg.configFile."flow".source =
     mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/flow";
 
@@ -204,6 +207,10 @@ in
     # These are faster coreutils replacements usually required by most tools like neovim & helix.
     fd
     ripgrep
+
+    # These are also required by neovim and helix for syntax-highlighting and DAP.
+    tree-sitter
+    lldb
 
     # Modern versions of jq, ls and cat.
     jaq
@@ -225,43 +232,30 @@ in
     xh
     hurl
 
-    # Fonts.
-    nerd-fonts.symbols-only
-    geist-font
-    nerd-fonts.geist-mono
-
-    # Required by neovim and helix for syntax-highlighting and DAP.
-    tree-sitter
-    lldb
-
-    # System languages.
-    # Zig.
-    zig
-    zls
-    # Rust.
-    rustup
-
     # Favourite emulator.
     qemu
-
-    # Colorful hexdump.
-    # _0x
-
-    # JS runtimes.
-    bun
-    nodejs_22
 
     # I use this for reviewing PRs and also for `gh browse`. Less commands to type, much convenient.
     gh
 
-    # Browser in TUI?
-    browsh
+    # Benchmark stuff.
+    hyperfine
 
     # For python slop. 
-    # uv
+    uv
 
-    # For OSDev.
-    # libisoburn
+    # For javascript slop.
+    bun
+    nodejs_22
+
+    # Handy scripts.
+    (pkgs.writeShellScriptBin "rot13" ''
+      tr 'A-Za-z' 'N-ZA-Mn-za-m'
+    '')
+
+    # Fonts.
+    nerd-fonts.symbols-only
+    noto-fonts
   ]
   ++ (lib.optional isDarwin darwin.trash)
   ++ (lib.optional isLinux trash-cli);

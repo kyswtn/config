@@ -11,8 +11,6 @@ layout {
               mode_scroll "#[fg=#D4BE98,bg=#282828]scroll "
               mode_tmux   "#[fg=#D4BE98,bg=#282828]ctrl+b "
 
-              hide_frame_for_single_pane "true"
-
               tab_normal   "#[fg=#D4BE98,bg=#282828] {name} "
               tab_active   "#[fg=#1E2021,bg=#A79A84,bold] {name} "
             }

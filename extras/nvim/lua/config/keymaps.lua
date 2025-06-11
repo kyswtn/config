@@ -52,3 +52,9 @@ map("t", "<Esc>", "<C-\\><C-n>", { desc = "Escape from terminal to normal mode" 
 -- Keybinding to toggle inline diagnostics
 map("n", "<Leader>ii", ':lua vim.cmd("DiagnosticsToggleVirtualText")<CR>', { noremap = true, silent = true })
 map("n", "<Leader>id", ':lua vim.cmd("DiagnosticsToggle")<CR>', { noremap = true, silent = true })
+
+-- Keybinding to toggle checkboxes
+map("n", "<C-space>", ":lua require('toggle-checkbox').toggle()<CR>")
+
+-- Keybinding to add semicolon to the end of the line.
+map({ "n", "i" }, "<C-;>", "<cmd>ToggleSemi<CR>", { noremap = true, silent = true })

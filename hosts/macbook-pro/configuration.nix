@@ -60,9 +60,6 @@
       "kamillobinski/thock"
     ];
     brews = [
-      "llvm"
-      "lld"
-      "swift-format"
       "thock"
     ];
     casks = [
@@ -71,9 +68,8 @@
       "alt-tab"
       "notunes"
       "ghostty"
-      "zen-browser"
-      "obsidian"
       "iina"
+      "obsidian"
       "visual-studio-code"
       "utm"
       "orbstack"
@@ -82,14 +78,15 @@
       "spotify"
       "tailscale"
       "discord"
-      "notion"
       "telegram"
       "zoom"
+      "signal"
       "brave-browser"
       "emacs-mac"
-      "legcord"
       "obs"
-      "firefox"
+      "google-chrome"
+      "wireshark"
+      "mochi"
     ];
   };
 

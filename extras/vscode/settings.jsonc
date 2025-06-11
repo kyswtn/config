@@ -18,7 +18,7 @@
   "files.associations": {
     "*.lock": "json",
     "*.svg": "xml",
-    "*.css": "tailwindcss",
+    "*.css": "css",
     "*.hcl": "terraform"
   },
   "files.exclude": {
@@ -199,6 +199,11 @@
   "[yaml][yml][dockercompose]": {
     "editor.guides.indentation": true
   },
+  "[rust]": {
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always"
+  }
+  },
   "nix.formatterPath": "nixpkgs-fmt",
   // Remote SSH.
   "remote.SSH.configFile": "~/.ssh/extra_config",
@@ -215,5 +220,5 @@
       "cva\\(([^)]*)\\)",
       "[\"'`]([^\"'`]*).*?[\"'`]"
     ]
-  ]
+  ],
 }
