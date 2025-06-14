@@ -37,14 +37,14 @@
             users = [ "kyaw" ];
             selected-features = [ "language-support" ];
           };
-          aarch64-linux = {
+          code = {
             system = "aarch64-linux";
             managed-by = "nixos";
             users = [ "kyaw" ];
             selected-features = [ "language-support" ];
           };
-          amd64-linux = {
-            system = "x86_64-linux";
+          work = {
+            system = "aarch64-linux";
             managed-by = "nixos";
             users = [ "kyaw" ];
             selected-features = [ "language-support" ];
