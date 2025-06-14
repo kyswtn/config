@@ -176,7 +176,6 @@ in
     profiles.default.extensions = with vscode-marketplace; [
       vscodevim.vim
       mkhl.direnv
-      frenco.vscode-vercel
     ];
   };
 
@@ -198,6 +197,10 @@ in
     mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/flow";
 
   home.packages = with pkgs; [
+    # Preferred C compiler and Make needed for most tools.
+    clang
+    gnumake
+
     # I feel like all unix users expect me to have these.
     fastfetch
     htop

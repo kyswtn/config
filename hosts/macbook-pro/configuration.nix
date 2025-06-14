@@ -87,6 +87,8 @@
       "google-chrome"
       "wireshark"
       "mochi"
+      "slack"
+      "mullvad-vpn"
     ];
   };
 

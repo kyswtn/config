@@ -37,13 +37,13 @@
             users = [ "kyaw" ];
             selected-features = [ "language-support" ];
           };
-          aarch64-linux = {
+          linux-vm = {
             system = "aarch64-linux";
             managed-by = "nixos";
             users = [ "kyaw" ];
             selected-features = [ "language-support" ];
           };
-          amd64-linux = {
+          zvkenax = {
             system = "x86_64-linux";
             managed-by = "nixos";
             users = [ "kyaw" ];

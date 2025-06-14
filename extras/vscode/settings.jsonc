@@ -143,8 +143,8 @@
     }
   ],
   // Editor font.
-  "editor.fontFamily": "Agave",
-  "editor.fontSize": 22,
+  "editor.fontFamily": "Noto Sans Mono",
+  "editor.fontSize": 20,
   "editor.fontWeight": "400",
   "editor.letterSpacing": -0.5,
   "editor.lineHeight": 1.45,

@@ -12,17 +12,26 @@ cd ~/config
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Setup nix-darwin.
+sudo su
 nix \
   --extra-experimental-features nix-command \
   --extra-experimental-features flakes \
   run nix-darwin/master#darwin-rebuild -- switch --flake .
 
 # Setup home-manager.
-nix run home-manager/master -- switch --flake .
+nix run home-manager/master -- switch --flake . -b backup
 
 # Make links so that --flake . is not required afterwards.
 sudo ln -s /Users/$USER/config /etc/nix-darwin
 sudo ln -s /Users/$USER/config /Users/$USER/.config/home-manager
+```
+
+## Broken Shell
+
+Zellij requires confirmation before downloading the plugin so the shell will be/look broken initially. Run this to fix it.
+
+```sh
+zellij plugin -- https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm
 ```
 
 ## Setup - UTM Linux
