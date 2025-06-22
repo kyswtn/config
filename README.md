@@ -8,9 +8,10 @@ git clone https://github.com/kyswtn/config.git ~/config
 sudo nixos-rebuild switch --flake ~/config#beelink
 
 # Setup home-manager.
-nix run home-manager/master -- switch --flake ~/config -b backup
+nix run .#home-manager -- switch --flake ~/config -b backup
 
 # Make links so that --flake . is not required afterwards.
+sudo rm -rf /etc/nixos
 sudo ln -s /home/$USER/config /etc/nixos/
 sudo ln -s /home/$USER/config /home/$USER/.config/home-manager
 ```
@@ -34,7 +35,7 @@ nix \
   run nix-darwin/master#darwin-rebuild -- switch --flake ~/config
 
 # Setup home-manager.
-nix run home-manager/master -- switch --flake ~/config -b backup
+nix run .#home-manager -- switch --flake ~/config -b backup
 
 # Make links so that --flake . is not required afterwards.
 sudo ln -s /Users/$USER/config /etc/nix-darwin
