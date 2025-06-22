@@ -6,7 +6,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vscode-extensions = {
@@ -19,7 +19,7 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, ... }:
     let
       mkSystems = import ./lib/mkSystems.nix inputs;
       systems = mkSystems {
@@ -44,6 +44,15 @@
           };
         };
       };
+
+      supportedSystems = [ "aarch64-darwin" "aarch64-linux" "x86_64-linux" ];
+      forAllSupportedSystems = fn: nixpkgs.lib.attrsets.genAttrs supportedSystems (system: fn (system));
+      apps = forAllSupportedSystems (system: {
+        home-manager = {
+          type = "app";
+          program = "${home-manager.packages.${system}.default}/bin/home-manager";
+        };
+      });
     in
-    systems // { };
+    systems // { inherit apps; };
 }

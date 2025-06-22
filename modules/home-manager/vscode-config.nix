@@ -5,7 +5,7 @@ with lib;
 let
   inherit (config.lib.file) mkOutOfStoreSymlink;
 
-  cfg = config.vscode-config-dir;
+  cfg = config.vscode-config;
   vscodePname = cfg.packageName;
 
   configDir = {
@@ -25,8 +25,8 @@ let
   keybindingsFilePath = "${userDir}/keybindings.json";
 in
 {
-  options.vscode-config-dir = {
-    enable = mkEnableOption "vscode-config-dir";
+  options.vscode-config = {
+    enable = mkEnableOption "vscode-config";
 
     packageName = mkOption {
       type = types.str;

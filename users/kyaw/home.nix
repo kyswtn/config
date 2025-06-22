@@ -164,15 +164,12 @@ in
   programs.vscode = {
     enable = isLinux;
     package = pkgs.vscode;
-    profiles.default.extensions = with pkgs.vscode-marketplace; [
-      vscodevim.vim
-      mkhl.direnv
-    ];
+    mutableExtensionsDir = true;
   };
 
-  # On macOS, VS Code is installed externally becuase i want to modify interface font but 
-  # settings and keybindings are still synced with this.
-  vscode-config-dir = {
+  # VSCode's configurations are managed by this patch, to allow editing of it
+  # within the editor.
+  vscode-config = {
     enable = true;
     packageName = "vscode";
     userSettingsFile = "${thisFlakeAbsolutePath}/extras/vscode/settings.jsonc";
