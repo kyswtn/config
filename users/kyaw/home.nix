@@ -2,7 +2,6 @@
 let
   inherit (pkgs.stdenv) isDarwin isLinux;
   inherit (config.lib.file) mkOutOfStoreSymlink;
-  inherit (pkgs.vscode-extensions) vscode-marketplace;
 
   credentials = import ../../credentials.nix;
   thisFlakeAbsolutePath = "${config.home.homeDirectory}/config";
@@ -165,7 +164,7 @@ in
   programs.vscode = {
     enable = isLinux;
     package = pkgs.vscode;
-    profiles.default.extensions = with vscode-marketplace; [
+    profiles.default.extensions = with pkgs.vscode-marketplace; [
       vscodevim.vim
       mkhl.direnv
     ];

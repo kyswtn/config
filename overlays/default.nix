@@ -1,5 +1,6 @@
 { flakeInputs, ... }: {
-  nixpkgs.overlays = [
-    flakeInputs.rust-overlay.overlays.default
+  nixpkgs.overlays = with flakeInputs; [
+    rust-overlay.overlays.default
+    vscode-extensions.overlays.default
   ];
 }
