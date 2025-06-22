@@ -1,12 +1,27 @@
-## Setup - macOS
+## Setup - Beelink
 
 ```sh
-cd ~
+# Clone the directory. Must always be at `~/config` as some scripts make such an assumption.
+git clone https://github.com/kyswtn/config.git ~/config
+
+# Rebuild switch.
+sudo nixos-rebuild switch --flake ~/config#beelink
+
+# Setup home-manager.
+nix run home-manager/master -- switch --flake ~/config -b backup
+
+# Make links so that --flake . is not required afterwards.
+sudo ln -s /home/$USER/config /etc/nixos/
+sudo ln -s /home/$USER/config /home/$USER/.config/home-manager
+```
+
+## Setup - MacBook Pro
+
+```sh
 scutil --set LocalHostName "Kyaws-MacBook-Pro"
 
 # Clone the directory. Must always be at `~/config` as some scripts make such an assumption.
 git clone https://github.com/kyswtn/config.git ~/config
-cd ~/config
 
 # Install homebrew.
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -16,22 +31,14 @@ sudo su
 nix \
   --extra-experimental-features nix-command \
   --extra-experimental-features flakes \
-  run nix-darwin/master#darwin-rebuild -- switch --flake .
+  run nix-darwin/master#darwin-rebuild -- switch --flake ~/config
 
 # Setup home-manager.
-nix run home-manager/master -- switch --flake . -b backup
+nix run home-manager/master -- switch --flake ~/config -b backup
 
 # Make links so that --flake . is not required afterwards.
 sudo ln -s /Users/$USER/config /etc/nix-darwin
 sudo ln -s /Users/$USER/config /Users/$USER/.config/home-manager
-```
-
-## Broken Shell
-
-Zellij requires confirmation before downloading the plugin so the shell will be/look broken initially. Run this to fix it.
-
-```sh
-zellij plugin -- https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm
 ```
 
 ## Setup - UTM Linux
@@ -46,7 +53,15 @@ ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' # Remember Machi
 ./scripts/lets-setup.sh # Then Follows instruction.
 
 # For syncing config later.
-./scripts/sync-config.sh $USER "<IP>"
+./scripts/sync-config.sh $USER "<IP or HostName>"
+```
+
+## Broken Shell
+
+Zellij requires confirmation before downloading the plugin so the shell will be/look broken initially. Run this to fix it.
+
+```sh
+zellij plugin -- https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm
 ```
 
 ## Documentation

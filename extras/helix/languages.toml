@@ -1,0 +1,23 @@
+[[language]]
+auto-format = true
+name = "nix"
+
+[language.formatter]
+args = []
+command = "nixpkgs-fmt"
+
+[[language]]
+auto-format = true
+name = "lua"
+
+[[language]]
+auto-format = true
+name = "yaml"
+
+[language.formatter]
+args = ["_.yaml"]
+command = "prettierd"
+
+[[language]]
+auto-format = true
+name = "typescript"

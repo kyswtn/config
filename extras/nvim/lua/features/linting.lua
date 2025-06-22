@@ -12,7 +12,7 @@ return {
         typescriptreact = { "biomejs" },
         go = { "golangcilint" },
         svelte = { "eslint_d" },
-        python = { "pylint" },
+        python = { "ruff" },
       }
     end,
   },

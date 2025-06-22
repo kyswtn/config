@@ -1,0 +1,8 @@
+theme = "base16_transparent"
+
+[editor]
+auto-format = true
+line-number = "relative"
+
+[editor.cursor-shape]
+insert = "bar"

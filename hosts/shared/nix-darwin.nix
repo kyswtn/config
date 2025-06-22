@@ -1,6 +1,6 @@
 { system, hostName, localHostName, flakeInputs, ... }:
 {
-  # Setup nix.
+  # Configure nix.
   nix = {
     optimise.automatic = true;
     settings = {
@@ -19,12 +19,15 @@
     };
   };
 
+  # Allow unfree packages.
+  nixpkgs.config.allowUnfree = true;
+
   # These are defined in flake.nix and are passed down as specialArgs.
   nixpkgs.hostPlatform = system;
   networking.hostName = hostName;
   networking.localHostName = localHostName;
 
-  # Setup timezone.
+  # Configure timezone.
   time.timeZone = "Asia/Bangkok";
 
   # Set Git commit hash for darwin-version.

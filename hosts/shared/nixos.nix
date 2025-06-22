@@ -1,5 +1,5 @@
 { system, hostName, ... }: {
-  # Setup nix.
+  # Configure nix.
   nix = {
     settings = {
       auto-optimise-store = true;
@@ -13,11 +13,14 @@
     };
   };
 
+  # Allow unfree packages.
+  nixpkgs.config.allowUnfree = true;
+
   # These are defined in flake.nix and are passed down as specialArgs.
   nixpkgs.hostPlatform = system;
   networking.hostName = hostName;
 
-  # Setup timezone & keyboard input.
+  # Configure timezone & locale.
   time.timeZone = "Asia/Bangkok";
   i18n.defaultLocale = "en_US.UTF-8";
 }

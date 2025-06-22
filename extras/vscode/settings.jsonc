@@ -143,7 +143,7 @@
     }
   ],
   // Editor font.
-  "editor.fontFamily": "Noto Sans Mono",
+  "editor.fontFamily": "IBM Plex Mono",
   "editor.fontSize": 20,
   "editor.fontWeight": "400",
   "editor.letterSpacing": -0.5,
@@ -209,7 +209,9 @@
   "remote.SSH.configFile": "~/.ssh/extra_config",
   "remote.SSH.useLocalServer": false,
   "remote.SSH.remotePlatform": {
-    "utm-linux": "linux"
+    "beelink": "linux",
+    "utm": "linux",
+    "vps": "linux",
   },
   // LLDB.
   "lldb.launch.expressions": "native",

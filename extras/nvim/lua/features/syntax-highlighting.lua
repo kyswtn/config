@@ -47,6 +47,7 @@ return {
           "terraform",
           "toml",
           "hcl",
+          "python"
         },
         sync_install = false,
         highlight = { enable = true },
