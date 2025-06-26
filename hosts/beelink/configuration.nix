@@ -1,29 +1,53 @@
-{ system, hostName, config, pkgs, ... }:
+{ pkgs, ... }:
+let
+  credentials = import ../../credentials.nix;
+in
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./user-management.nix
+    ./impure.nix
   ];
 
-  # Preinstall shells to configure proper NIX_PATH variables.
-  programs.zsh.enable = true;
-  programs.fish.enable = true;
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Enable automatic login for the user.
+  # Configure primary user.
+  users.users.kyaw = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+    openssh.authorizedKeys.keys = credentials.sshKeys;
+    shell = pkgs.fish;
+  };
   services.getty.autologinUser = "kyaw";
+  security.sudo.wheelNeedsPassword = false;
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    options = "ctrl:swapcaps";
+  # Enable **system-level** fish shell.
+  programs.fish = {
+    enable = true;
+    loginShellInit = ''
+      # If the user's not an admin & tty is 1 then start sway.
+      if test (id --user $USER) -ge 1000 && test (tty) = "/dev/tty1"
+        exec sway
+      end
+    '';
   };
 
-  # Use xkb configurations in TTY as well.
-  console.useXkbConfig = true;
+  # Configure networking.
+  networking.networkmanager.enable = true;
+  services.tailscale.enable = true;
+  services.openssh = {
+    enable = false; # Only enable for the first time before running `tailscale up`.
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+      AllowAgentForwarding = "yes";
+    };
+  };
+
+  # Configure bluetooth.
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
+
+  # Configure audio.
+  services.pipewire.enable = true;
 
   # Install and configure minimal git, home-manager will install full git later.
   programs.git = {
@@ -31,20 +55,21 @@
     package = pkgs.gitMinimal;
   };
 
-  # environment.systemPackages = with pkgs; [ ];
+  environment.systemPackages = with pkgs; [
+    trash-cli
+    wl-clipboard
+    mako
+  ];
 
-  # Enable Tailscale.
-  services.tailscale.enable = true;
-
-  # Enable the OpenSSH daemon when Tailscale is not enough for whatever reason.
-  services.openssh = {
-    enable = false;
-    settings = {
-      PasswordAuthentication = false;
-      PermitRootLogin = "no";
-      AllowAgentForwarding = "yes";
-    };
+  # Configure window managers.
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+    xwayland.enable = true;
   };
+
+  # Force GTK a dark theme.
+  environment.variables.GTK_THEME = "Adwaita:dark";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.05";

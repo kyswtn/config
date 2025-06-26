@@ -64,7 +64,6 @@ return {
         marksman = {},
         html = {},
         cssls = {},
-        pylsp = {},
         jsonls = {},
         ts_ls = {
           settings = {},
@@ -97,6 +96,9 @@ return {
             },
           },
         },
+        ruff = {
+          settings = {}
+        }
       }
 
       for server_name, server_config in pairs(servers) do

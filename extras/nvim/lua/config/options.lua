@@ -33,3 +33,7 @@ opt.tabstop = 2 -- Number of spaces tabs count for.
 opt.clipboard = "unnamedplus" -- Use system clipboard.
 opt.ignorecase = true -- Ignore case when searching; use `\C` to force not doing that.
 opt.smartcase = true -- Don't ignore case if search pattern has uppercase.
+
+-- Disable autoformat initially.
+vim.b.disable_autoformat = true
+vim.g.disable_autoformat = true

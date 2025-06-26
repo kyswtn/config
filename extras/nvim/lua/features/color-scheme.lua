@@ -9,6 +9,7 @@ return {
     init = function()
       vim.g.gruvbox_material_background = "hard"
       vim.g.gruvbox_material_transparent_background = true
+      vim.cmd.set("background=dark")
       vim.cmd.colorscheme("gruvbox-material")
     end,
   },

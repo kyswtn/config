@@ -1,20 +1,19 @@
-{ pkgs, lib, config, ... }:
+{ system, pkgs, lib, config, ... }:
 let
-  inherit (pkgs.stdenv) isDarwin isLinux;
   inherit (config.lib.file) mkOutOfStoreSymlink;
+  arch = (builtins.elemAt (builtins.split "-" system) 0);
+  os = (builtins.elemAt (builtins.split "-" system) 2);
 
   credentials = import ../../credentials.nix;
   thisFlakeAbsolutePath = "${config.home.homeDirectory}/config";
 in
 {
-  # SSH should be installed at system-level.
   programs.ssh = {
     enable = true;
     package = null;
     includes = [ "~/.ssh/extra_config" ];
   };
 
-  # GPG is only used for signing binaries and occassionally verifying them.
   programs.gpg = {
     enable = true;
     package = pkgs.gnupg;
@@ -33,7 +32,7 @@ in
     };
     includes = [
       {
-        condition = "gitdir:~/work";
+        condition = "gitdir:~/work/";
         path = "~/work/.gitconfig";
       }
     ];
@@ -43,7 +42,6 @@ in
     };
   };
 
-  # Password manager and SSH agent.
   programs._1password = {
     enable = true;
     cli.enable = true;
@@ -51,25 +49,18 @@ in
     enableGitSigning = true;
     sshKeys = [
       { vault = "Personal"; item = "SSH Key"; }
+      { vault = "Work"; item = "work-work-work-work-work"; }
     ];
   };
 
   programs.ghostty = {
     enable = true;
-    package = if isDarwin then null else pkgs.ghostty;
+    package = pkgs.ghostty;
     settings = {
-      command = "${pkgs.zellij}/bin/zellij options --default-shell ${pkgs.fish}/bin/fish";
+      command = "${pkgs.fish}/bin/fish";
       config-file = "${thisFlakeAbsolutePath}/extras/ghostty.conf";
     };
   };
-
-  programs.zellij = {
-    enable = true;
-    package = pkgs.zellij;
-    settings = { };
-  };
-  xdg.configFile."zellij".source =
-    mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/zellij";
 
   programs.fish = {
     enable = true;
@@ -105,7 +96,7 @@ in
       set --universal tide_character_icon ">"
 
       # Disable command_duration.
-      set --universal tide_right_prompt_items (string match -rv cmd_duration $tide_right_prompt_items)
+      set -U tide_right_prompt_items (string match -rv cmd_duration $tide_right_prompt_items)
 
       # Hide direnv logs.
       set -x DIRENV_LOG_FORMAT ""
@@ -120,6 +111,12 @@ in
     '';
   };
 
+  programs.tmux = {
+    enable = true;
+    package = pkgs.tmux;
+    escapeTime = 0;
+  };
+
   programs.fzf = {
     enable = true;
     package = pkgs.fzf;
@@ -132,6 +129,11 @@ in
       enable = true;
       package = pkgs.nix-direnv;
     };
+  };
+
+  programs.gh = {
+    enable = true;
+    package = pkgs.gh;
   };
 
   # Text editors and their configs.
@@ -161,8 +163,13 @@ in
   xdg.configFile."flow".source =
     mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/flow";
 
+  programs.zed-editor = {
+    enable = true;
+    package = pkgs.zed-editor;
+  };
+
   programs.vscode = {
-    enable = isLinux;
+    enable = os == "linux";
     package = pkgs.vscode;
     mutableExtensionsDir = true;
   };
@@ -176,25 +183,25 @@ in
     keybindingsFile = "${thisFlakeAbsolutePath}/extras/vscode/keybindings.jsonc";
   };
 
-  programs.gh = {
-    enable = true;
-    package = pkgs.gh;
-  };
-
   home.packages = with pkgs; [
-    # Fonts - Sans, Serif, Mono, Fallback and Icons.
-    paratype-pt-sans
-    source-serif
-    ibm-plex
-    noto-fonts
-    nerd-fonts.symbols-only
-
-    # When I need to pipe a password to SSH directly from 1password without typing it in.
-    sshpass
-
     # Preferred C compiler and Make needed for most tools.
     clang
     gnumake
+
+    # Fonts - Sans, Serif, Mono, Fallback, Emoji and Icons.
+    geist-font
+    source-serif
+    input-fonts
+    noto-fonts
+    noto-fonts-color-emoji
+    font-awesome
+    nerd-fonts.symbols-only
+
+    # Browser.
+    brave
+
+    # When I need to pipe a password to SSH directly from 1password without typing it in.
+    sshpass
 
     # These are usually required by text editors such as neovim.
     fd
@@ -206,13 +213,9 @@ in
     eza
     bat
 
-    # CLI text manipulation tools.
+    # CLI text manipulation tools and handy scripts.
     jq
-
-    # Handy scripts.
-    (pkgs.writeShellScriptBin "rot13" ''
-      tr 'A-Za-z' 'N-ZA-Mn-za-m'
-    '')
+    (writeShellScriptBin "rot13" "tr 'A-Za-z' 'N-ZA-Mn-za-m'")
 
     # Markdown LSP.
     marksman
@@ -258,10 +261,13 @@ in
     qemu
     hyperfine
   ]
-  ++ (lib.optional isDarwin darwin.trash)
-  ++ (lib.optional isLinux trash-cli);
+  ++ (lib.optionals (system != "aarch64-linux") [
+    slack
+    discord
+  ]);
 
   imports = [ ]
+    ++ (lib.optional (os == "linux") ./linux.nix)
     ++ (lib.optional (builtins.pathExists ./secrets.nix) ./secrets.nix);
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

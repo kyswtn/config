@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   # Miscellaneous configurations.
   # By the way ’ here is not ' otherwise nix-darwin errors.
   networking.computerName = "Kyaw’s MacBook Pro";
@@ -49,6 +49,10 @@
     ShowPathbar = true;
   };
 
+  environment.systemPackages = with pkgs; [
+    darwin.trash
+  ];
+
   # Homebrew.
   homebrew = {
     enable = true;
@@ -64,7 +68,6 @@
       "raycast"
       "alt-tab"
       "notunes"
-      "ghostty"
       "iina"
       "obsidian"
       "visual-studio-code"
@@ -74,17 +77,12 @@
       "proton-mail"
       "spotify"
       "tailscale"
-      "discord"
       "telegram"
       "zoom"
       "signal"
-      "brave-browser"
       "emacs-mac"
       "obs"
-      "google-chrome"
-      "wireshark"
       "mochi"
-      "slack"
       "mullvad-vpn"
     ];
   };

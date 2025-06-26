@@ -6,6 +6,7 @@ in
   # Nixpkgs configurations.
   nixpkgs.config = {
     allowUnfree = true;
+    input-fonts.acceptLicense = true;
   };
 
   # Home-manager has to manage itself with flakes setup.

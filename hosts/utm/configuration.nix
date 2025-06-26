@@ -52,6 +52,7 @@
     # not at home-manager level.
     xclip
     killall
+    trash-cli
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
