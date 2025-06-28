@@ -115,6 +115,10 @@ in
     enable = true;
     package = pkgs.tmux;
     escapeTime = 0;
+    extraConfig = ''
+      set -sg escape-time 0 
+      set -g status-interval 0
+    '';
   };
 
   programs.fzf = {
@@ -197,6 +201,10 @@ in
     font-awesome
     nerd-fonts.symbols-only
 
+    # Extra fonts.
+    libertinus
+    monaspace
+
     # Browser.
     brave
 
@@ -260,6 +268,9 @@ in
     netcat-gnu
     qemu
     hyperfine
+
+    # Games.
+    prismlauncher
   ]
   ++ (lib.optionals (system != "aarch64-linux") [
     slack

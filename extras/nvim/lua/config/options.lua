@@ -1,7 +1,16 @@
 local opt = vim.opt
 
+-- Use quiet colorscheme.
+vim.cmd("colorscheme quiet")
+
 -- Syntax highlighting.
 opt.termguicolors = true -- True color support.
+
+-- Turn default syntax highlighting off and use treesitter's.
+vim.cmd("syntax off")
+
+-- Use system clipboard.
+vim.o.clipboard = "unnamedplus"
 
 -- Line numbers.
 opt.relativenumber = true -- Use relative line numbers.

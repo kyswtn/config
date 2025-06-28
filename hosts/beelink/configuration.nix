@@ -5,7 +5,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    ./impure.nix
+    # /home/kyaw/work/mixrank/etc/nixos/mixrank-dev-machine.nix
   ];
 
   # Configure primary user.
@@ -42,8 +42,15 @@ in
   };
 
   # Configure bluetooth.
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        ControllerMode = "dual";
+      };
+    };
+  };
   services.blueman.enable = true;
 
   # Configure audio.
