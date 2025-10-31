@@ -2,15 +2,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nix-darwin = {
-      url = "github:lnl7/nix-darwin";
+      url = "github:lnl7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    vscode-extensions = {
-      url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rust-overlay = {
@@ -23,11 +19,9 @@
     let
       mkSystems = import ./lib/mkSystems.nix inputs;
       systems = mkSystems {
-        features = [ ];
         hosts = {
           macbook-pro = {
             localHostName = "Kyaws-MacBook-Pro";
-
             system = "aarch64-darwin";
             managed-by = "nix-darwin";
             users = [ "kyaw" ];
@@ -45,9 +39,8 @@
         };
       };
 
-      supportedSystems = [ "aarch64-darwin" "aarch64-linux" "x86_64-linux" ];
-      forAllSupportedSystems = fn: nixpkgs.lib.attrsets.genAttrs supportedSystems (system: fn (system));
-      apps = forAllSupportedSystems (system: {
+      forAllSystems = fn: nixpkgs.lib.attrsets.genAttrs nixpkgs.lib.systems.flakeExposed (system: fn (system));
+      apps = forAllSystems (system: {
         home-manager = {
           type = "app";
           program = "${home-manager.packages.${system}.default}/bin/home-manager";

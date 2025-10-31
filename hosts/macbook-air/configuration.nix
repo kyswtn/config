@@ -1,7 +1,6 @@
 { pkgs, ... }: {
-  # Miscellaneous configurations.
-  # By the way ’ here is not ' otherwise nix-darwin errors.
-  networking.computerName = "Kyaw’s MacBook Pro";
+  # See macbook-pro/configuration.nix for more detailed comments.
+  networking.computerName = "Kyaw’s MacBook Air";
   system.primaryUser = "kyaw";
 
   # Add proper NIX_PATH variables.
@@ -10,26 +9,20 @@
   programs.fish.enable = true;
 
   system.defaults.NSGlobalDomain = {
-    # Fastest key repeat rate + lowest delay until repeat.
     KeyRepeat = 2;
     InitialKeyRepeat = 15;
     # When i press character keys, don't show accent options.
     ApplePressAndHoldEnabled = false;
   };
 
-  # Keyboard.
   system.keyboard = {
     enableKeyMapping = true;
     remapCapsLockToControl = true;
   };
-
-  # Trackpad.
   system.defaults.trackpad = {
     Clicking = true;
     Dragging = false;
   };
-
-  # Dock.
   system.defaults.dock = {
     orientation = "bottom";
     autohide = true;
@@ -45,7 +38,6 @@
     mru-spaces = false;
   };
 
-  # Finder.
   system.defaults.finder = {
     ShowPathbar = true;
   };
@@ -56,26 +48,17 @@
     alt-tab-macos
   ];
 
-  # Homebrew.
   homebrew = {
     enable = true;
-    taps = [ "kamillobinski/thock" ];
-    brews = [ "thock" ];
     casks = [
       "raycast"
       "iina"
-      "obsidian"
       "utm"
-      "orbstack"
+      "mullvad-vpn"
       "1password"
       "proton-mail"
       "spotify"
       "tailscale"
-      "telegram"
-      "zoom"
-      "signal"
-      "obs"
-      "mullvad-vpn"
     ];
   };
 

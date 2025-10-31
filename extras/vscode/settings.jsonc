@@ -80,7 +80,7 @@
   "editor.lightbulb.enabled": "off",
   "editor.hover.delay": 1000,
   "editor.inlayHints.enabled": "offUnlessPressed",
-  "editor.minimap.autohide": true,
+  "editor.minimap.autohide": "mouseover",
   "editor.inlineSuggest.enabled": false,
   "editor.parameterHints.enabled": false,
   "editor.quickSuggestionsDelay": 100000,

@@ -1,13 +1,16 @@
-{ system, pkgs, lib, config, ... }:
+{ system, pkgs, lib, config, flakeInputs, ... }:
 let
   inherit (config.lib.file) mkOutOfStoreSymlink;
-  arch = (builtins.elemAt (builtins.split "-" system) 0);
   os = (builtins.elemAt (builtins.split "-" system) 2);
 
   credentials = import ../../credentials.nix;
   thisFlakeAbsolutePath = "${config.home.homeDirectory}/config";
 in
 {
+  nixpkgs.overlays = with flakeInputs; [
+    rust-overlay.overlays.default
+  ];
+
   programs.ssh = {
     enable = true;
     package = null;
@@ -19,28 +22,30 @@ in
     package = pkgs.gnupg;
   };
 
-  programs.git = {
-    enable = true;
-    package = pkgs.git;
-    userName = credentials.name;
-    userEmail = credentials.email;
-    signing.key = credentials.primarySshKey;
-    extraConfig = {
-      init.defaultBranch = "main";
-      commit.gpgSign = true;
-      tag.gpgSign = true;
-    };
-    includes = [
-      {
-        condition = "gitdir:~/work/";
-        path = "~/work/.gitconfig";
-      }
-    ];
-    delta = {
+  programs.git =
+    let
+      gitconfigPaths = map (p: {
+        condition = "gitdir:~/${p}/";
+        path = "~/${p}/.gitconfig";
+      });
+    in
+    {
       enable = true;
-      package = pkgs.delta;
+      package = pkgs.git;
+      userName = credentials.name;
+      userEmail = credentials.email;
+      signing.key = credentials.primarySshKey;
+      extraConfig = {
+        init.defaultBranch = "main";
+        commit.gpgSign = true;
+        tag.gpgSign = true;
+      };
+      includes = gitconfigPaths [ "work" ];
+      delta = {
+        enable = true;
+        package = pkgs.delta;
+      };
     };
-  };
 
   programs._1password = {
     enable = true;
@@ -55,7 +60,7 @@ in
 
   programs.ghostty = {
     enable = true;
-    package = pkgs.ghostty;
+    package = null;
     settings = {
       command = "${pkgs.fish}/bin/fish";
       config-file = "${thisFlakeAbsolutePath}/extras/ghostty.conf";
@@ -157,34 +162,9 @@ in
   xdg.configFile."helix".source =
     mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/helix";
 
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs;
-  };
-  xdg.configFile."emacs".source =
-    mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/emacs";
-
-  xdg.configFile."flow".source =
-    mkOutOfStoreSymlink "${thisFlakeAbsolutePath}/extras/flow";
-
   programs.zed-editor = {
     enable = true;
     package = pkgs.zed-editor;
-  };
-
-  programs.vscode = {
-    enable = os == "linux";
-    package = pkgs.vscode;
-    mutableExtensionsDir = true;
-  };
-
-  # VSCode's configurations are managed by this patch, to allow editing of it
-  # within the editor.
-  vscode-config = {
-    enable = true;
-    packageName = "vscode";
-    userSettingsFile = "${thisFlakeAbsolutePath}/extras/vscode/settings.jsonc";
-    keybindingsFile = "${thisFlakeAbsolutePath}/extras/vscode/keybindings.jsonc";
   };
 
   home.packages = with pkgs; [
@@ -195,18 +175,11 @@ in
     # Fonts - Sans, Serif, Mono, Fallback, Emoji and Icons.
     geist-font
     source-serif
-    input-fonts
+    monaspace
     noto-fonts
     noto-fonts-color-emoji
     font-awesome
     nerd-fonts.symbols-only
-
-    # Extra fonts.
-    libertinus
-    monaspace
-
-    # Browser.
-    brave
 
     # When I need to pipe a password to SSH directly from 1password without typing it in.
     sshpass
@@ -268,6 +241,7 @@ in
     netcat-gnu
     qemu
     hyperfine
+    localsend
 
     # Games.
     prismlauncher
