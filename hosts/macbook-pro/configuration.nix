@@ -62,6 +62,8 @@
     taps = [ "kamillobinski/thock" ];
     brews = [ "thock" ];
     casks = [
+      "ghostty"
+      "brave-browser"
       "raycast"
       "iina"
       "obsidian"

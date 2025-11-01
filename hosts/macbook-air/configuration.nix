@@ -51,13 +51,12 @@
   homebrew = {
     enable = true;
     casks = [
+      "ghostty"
+      "brave-browser"
       "raycast"
-      "iina"
       "utm"
       "mullvad-vpn"
       "1password"
-      "proton-mail"
-      "spotify"
       "tailscale"
     ];
   };

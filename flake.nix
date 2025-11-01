@@ -9,43 +9,50 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }:
     let
-      mkSystems = import ./lib/mkSystems.nix inputs;
-      systems = mkSystems {
-        hosts = {
-          macbook-pro = {
-            localHostName = "Kyaws-MacBook-Pro";
-            system = "aarch64-darwin";
-            managed-by = "nix-darwin";
-            users = [ "kyaw" ];
-          };
-          beelink = {
-            system = "x86_64-linux";
-            managed-by = "nixos";
-            users = [ "kyaw" ];
-          };
-          utm = {
-            system = "aarch64-linux";
-            managed-by = "nixos";
-            users = [ "kyaw" ];
-          };
-        };
-      };
+      forAllSystems = fn:
+        assert nixpkgs.lib.genAttrs [ "a" "b" ] (x: x + "1") == { a = "a1"; b = "b1"; };
+        nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed (system: fn (system));
 
-      forAllSystems = fn: nixpkgs.lib.attrsets.genAttrs nixpkgs.lib.systems.flakeExposed (system: fn (system));
       apps = forAllSystems (system: {
         home-manager = {
           type = "app";
           program = "${home-manager.packages.${system}.default}/bin/home-manager";
         };
       });
+
+      packages = forAllSystems (system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          language-support = pkgs.callPackage ./packages/language-support.nix { };
+        });
+
+      mkSystems = import ./lib/mkSystems.nix inputs;
+      systems = mkSystems {
+        hosts = {
+          macbook-pro = {
+            localHostName = "Kyaws-MacBook-Pro";
+            system = "aarch64-darwin";
+            managedBy = "nix-darwin";
+            users = [ "kyaw" ];
+          };
+          beelink = {
+            system = "x86_64-linux";
+            managedBy = "nixos";
+            users = [ "kyaw" ];
+          };
+          utm = {
+            system = "aarch64-linux";
+            managedBy = "nixos";
+            users = [ "kyaw" ];
+          };
+        };
+      };
     in
-    systems // { inherit apps; };
+    systems // { inherit apps packages; };
 }
