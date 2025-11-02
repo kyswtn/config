@@ -23,18 +23,21 @@ sudo ln -s /home/$USER/config /home/$USER/.config/home-manager
 # scutil --set LocalHostName "Kyaws-MacBook-Pro"
 # scutil --set LocalHostName "Kyaws-MacBook-Air"
 
-# Clone the directory. Must always be at `~/config` as some scripts make such an assumption.
-git clone https://github.com/kyswtn/config.git ~/config
+# Install Nix.
+/bin/bash <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
 
 # Install homebrew.
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Clone the directory. Must always be at `~/config` as some scripts make such an assumption.
+git clone https://github.com/kyswtn/config.git ~/config
 
 # Setup nix-darwin.
 sudo su
 nix \
   --extra-experimental-features nix-command \
   --extra-experimental-features flakes \
-  run nix-darwin/master#darwin-rebuild -- switch --flake ~/config
+  run .#darwin-rebuild -- switch --flake ~/config
 
 # Setup home-manager.
 nix run .#home-manager -- switch --flake ~/config -b backup
@@ -59,18 +62,11 @@ ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' # Remember Machi
 ./scripts/sync-config.sh $USER "<IP or HostName>"
 ```
 
-## Broken Shell
-
-Zellij requires confirmation before downloading the plugin so the shell will be/look broken initially. Run this to fix it.
-
-```sh
-zellij plugin -- https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm
-```
-
 ## Documentation
 
 - Multiple host configurations are possible.
 - Each host can have multiple different users. Users are created at OS level.
 - Home manager works on $HOME folders already created.
-- Each user can have multiple different features (used by home-manager) which can be turned on/off at flake level.
+- Systems and homes are configured minimally with only essential configurations.
+- More packages are grouped in `/packages` and can be installed with `nix profile install`.
 - Software configurations (e.g. vim, ghostty) live in `/extras`.

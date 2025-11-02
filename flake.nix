@@ -11,13 +11,17 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }:
+  outputs = inputs@{ nixpkgs, nix-darwin, home-manager, ... }:
     let
       forAllSystems = fn:
         assert nixpkgs.lib.genAttrs [ "a" "b" ] (x: x + "1") == { a = "a1"; b = "b1"; };
         nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed (system: fn (system));
 
       apps = forAllSystems (system: {
+        darwin-rebuild = {
+          type = "app";
+          program = "${nix-darwin.packages.${system}.default}/bin/darwin-rebuild";
+        };
         home-manager = {
           type = "app";
           program = "${home-manager.packages.${system}.default}/bin/home-manager";
