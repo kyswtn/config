@@ -45,6 +45,12 @@
             managedBy = "nix-darwin";
             users = [ "kyaw" ];
           };
+          macbook-air = {
+            localHostName = "Kyaws-MacBook-Air";
+            system = "aarch64-darwin";
+            managedBy = "nix-darwin";
+            users = [ "kyaw" ];
+          };
           beelink = {
             system = "x86_64-linux";
             managedBy = "nixos";
