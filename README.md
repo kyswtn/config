@@ -37,7 +37,8 @@ sudo su
 nix \
   --extra-experimental-features nix-command \
   --extra-experimental-features flakes \
-  run .#darwin-rebuild -- switch --flake ~/config
+  run .#darwin-rebuild -- switch --flake /Users/kyaw/config
+exit # quit su
 
 # Setup home-manager.
 nix run .#home-manager -- switch --flake ~/config -b backup
