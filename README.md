@@ -16,10 +16,12 @@ sudo ln -s /home/$USER/config /etc/nixos/
 sudo ln -s /home/$USER/config /home/$USER/.config/home-manager
 ```
 
-## Setup - MacBook Pro
+## Setup - MacBooks
 
 ```sh
-scutil --set LocalHostName "Kyaws-MacBook-Pro"
+# Pro or Air
+# scutil --set LocalHostName "Kyaws-MacBook-Pro"
+# scutil --set LocalHostName "Kyaws-MacBook-Air"
 
 # Clone the directory. Must always be at `~/config` as some scripts make such an assumption.
 git clone https://github.com/kyswtn/config.git ~/config

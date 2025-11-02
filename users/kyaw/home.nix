@@ -131,8 +131,6 @@ in
     };
   };
 
-  # Text editors and their configs.
-
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-unwrapped;
