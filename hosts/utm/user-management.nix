@@ -6,7 +6,7 @@ in
   users.users.kyaw = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
-    openssh.authorizedKeys.keys = credentials.sshKeys;
+    openssh.authorizedKeys.keys = credentials.sshKeysList;
     shell = pkgs.fish;
   };
 }

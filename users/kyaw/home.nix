@@ -79,16 +79,11 @@ in
     includes = [ "~/.ssh/extra_config" ];
   };
 
-  programs.gpg = {
-    enable = true;
-    package = pkgs.gnupg;
-  };
-
   programs.git =
     let
-      gitconfigPaths = map (p: {
-        condition = "gitdir:~/${p}/";
-        path = "~/${p}/.gitconfig";
+      mkIncludes = lib.mapAttrsToList (path: contents: {
+        condition = "gitdir:${path}";
+        contents = contents;
       });
     in
     {
@@ -96,13 +91,15 @@ in
       package = pkgs.git;
       userName = credentials.name;
       userEmail = credentials.email;
-      signing.key = credentials.primarySshKey;
+      signing.key = credentials.sshKeys.main;
       extraConfig = {
         init.defaultBranch = "main";
         commit.gpgSign = true;
         tag.gpgSign = true;
       };
-      includes = gitconfigPaths [ "work" ];
+      includes = mkIncludes {
+        "~/work/" = { user.signingKey = credentials.sshKeys.work; };
+      };
       delta = {
         enable = true;
         package = pkgs.delta;
@@ -149,13 +146,7 @@ in
     clang
     gnumake
 
-    # For networking.
-    netcat-gnu
-
-    # When I need to pipe a password to SSH directly from 1password without typing it in.
-    sshpass
-
-    # These are usually required by text editors such as neovim.
+    # These are usually required by text editors such as neovim and plugins.
     fd
     ripgrep
     tree-sitter
@@ -168,6 +159,12 @@ in
     # CLI text manipulation tools and handy scripts.
     jq
     (writeShellScriptBin "rot13" "tr 'A-Za-z' 'N-ZA-Mn-za-m'")
+
+    # For networking.
+    netcat-gnu
+
+    # When I need to pipe a password to SSH directly from 1password without typing it in.
+    sshpass
 
     # For emulations.
     qemu
