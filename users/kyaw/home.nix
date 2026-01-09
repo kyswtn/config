@@ -173,7 +173,7 @@ in
     # Fonts.
     geist-font
     source-serif
-    monaspace
+    jetbrains-mono
     noto-fonts
     noto-fonts-color-emoji
     font-awesome

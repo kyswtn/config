@@ -9,6 +9,10 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-apple-silicon = {
+      url = "github:nix-community/nixos-apple-silicon";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ nixpkgs, nix-darwin, home-manager, ... }:
@@ -46,9 +50,8 @@
             users = [ "kyaw" ];
           };
           macbook-air = {
-            localHostName = "Kyaws-MacBook-Air";
-            system = "aarch64-darwin";
-            managedBy = "nix-darwin";
+            system = "aarch64-linux";
+            managedBy = "nixos";
             users = [ "kyaw" ];
           };
           beelink = {

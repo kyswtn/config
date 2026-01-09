@@ -1,7 +1,7 @@
 local opt = vim.opt
 
 -- Use quiet colorscheme.
-vim.cmd("colorscheme quiet")
+-- vim.cmd("colorscheme quiet")
 
 -- Syntax highlighting.
 opt.termguicolors = true -- True color support.
@@ -44,5 +44,5 @@ opt.ignorecase = true -- Ignore case when searching; use `\C` to force not doing
 opt.smartcase = true -- Don't ignore case if search pattern has uppercase.
 
 -- Disable autoformat initially.
-vim.b.disable_autoformat = true
-vim.g.disable_autoformat = true
+-- vim.b.disable_autoformat = true
+-- vim.g.disable_autoformat = true
