@@ -1,0 +1,33 @@
+[
+  {
+    "clock": {
+      "format": "󰅐 {:%H:%M}",
+      "interval": 60,
+      "max-length": 25,
+      "tooltip": true,
+      "tooltip-format": "{:%Y-%m-%d}"
+    },
+    "height": 32,
+    "layer": "top",
+    "modules-center": [
+      "niri/window"
+    ],
+    "modules-left": [
+      "niri/workspaces"
+    ],
+    "modules-right": [
+      "privacy",
+      "tray",
+      "pulseaudio",
+      "clock"
+    ],
+    "position": "top",
+    "pulseaudio": {
+      "format": "󰕾 {volume}%",
+      "format-muted": "󰝟"
+    },
+    "tray": {
+      "spacing": 10
+    }
+  }
+]

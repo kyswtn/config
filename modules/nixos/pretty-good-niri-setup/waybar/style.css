@@ -1,0 +1,60 @@
+* {
+  font-family: "Comic Code", "Symbols Nerd Font";
+  font-size: 16px;
+  font-weight: 500;
+}
+
+window#waybar {
+  background-color: #000000;
+  padding: 5px;
+}
+
+#workspaces button, #pulseaudio, #clock, #custom-workflow {
+  padding: 0 8px;
+  background-color: transparent;
+  color: #ffffff;
+  border: none;
+  border-radius: 0;
+}
+
+#workspaces button:hover, 
+#pulseaudio:hover, 
+#clock:hover, 
+#custom-workflow:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#workspaces button.focused {
+  background: #ffffff;
+}
+
+#workspaces button.focused * {
+  color: #000000;
+}
+
+#pulseaudio,
+#privacy,
+#clock,
+#tray,
+#custom-workflow {
+  padding: 0 10px;
+  color: #ffffff;
+}
+
+#window,
+#workspaces {
+  margin: 0 4px;
+}
+
+.modules-left > widget:first-child > #workspaces {
+  margin-left: 0;
+}
+
+#tray,
+#privacy {
+  margin-right: 4px;
+}
+
+#privacy {
+  color: red;
+}
