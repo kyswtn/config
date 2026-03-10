@@ -18,7 +18,7 @@
       set -g default-terminal 'xterm-ghostty'
       set -s extended-keys on
       set -as terminal-features 'xterm*:extkeys'
-      set -g set-clipboard on
+      set -g allow-passthrough on
     '';
   };
 }
