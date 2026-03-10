@@ -75,23 +75,27 @@
   # Homebrew.
   homebrew = {
     enable = true;
-    brews = [ ];
+    brews = [
+      "zeroclaw"
+    ];
     casks = [
       "1password"
       "brave-browser"
       "discord"
       "ghostty"
+      "iina"
       "mullvad-vpn"
       "obs"
       "obsidian"
       "proton-mail"
       "raycast"
       "selfcontrol"
+      "signal"
       "slack"
       "spotify"
       "tailscale-app"
+      "visual-studio-code"
       "zed"
-      "zeroclaw"
     ];
   };
 

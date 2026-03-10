@@ -57,11 +57,6 @@
       mkSystems = import ./lib/mkSystems.nix inputs;
       systems = mkSystems {
         hosts = {
-          beelink = {
-            system = "x86_64-linux";
-            managedBy = "nixos";
-            users = [ "marmot" ];
-          };
           macbook-pro = {
             localHostName = "Big-Mac";
             system = "aarch64-darwin";

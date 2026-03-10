@@ -4,6 +4,21 @@
     enable = true;
     package = null;
     includes = [ "~/.ssh/extra_config" ];
+    enableDefaultConfig = false;
+    matchBlocks = {
+      "*" = {
+        forwardAgent = false;
+        addKeysToAgent = "no";
+        compression = false;
+        serverAliveInterval = 0;
+        serverAliveCountMax = 3;
+        hashKnownHosts = false;
+        userKnownHostsFile = "~/.ssh/known_hosts";
+        controlMaster = "no";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "no";
+      };
+    };
   };
 
   programs.git = {
@@ -27,6 +42,7 @@
     settings = {
       command = "${pkgs.fish}/bin/fish";
       macos-titlebar-style = "tabs";
+      quit-after-last-window-closed = true;
       theme = "Kitty Default";
       # Font, no bold.
       font-family = "Comic Code";
@@ -83,20 +99,6 @@
     shellAbbrs = {
       rm = "trash";
     };
-  };
-
-  programs.tmux = {
-    enable = true;
-    package = pkgs.tmux;
-    extraConfig = ''
-      set -sg escape-time 0
-      set -g status-interval 0
-      set -g default-shell ${pkgs.fish}/bin/fish
-
-      set -g default-terminal 'xterm-ghostty'
-      set -s extended-keys on
-      set -as terminal-features 'xterm*:extkeys'
-    '';
   };
 
   home.packages = with pkgs; [
